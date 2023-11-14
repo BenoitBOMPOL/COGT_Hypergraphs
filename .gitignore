@@ -1,0 +1,10 @@
+Python_Code/__pycache__/
+Beamer/*.aux
+Beamer/*.fdb_latexmk
+Beamer/*.fls
+Beamer/*.nav
+Beamer/*.out
+Beamer/*.snm
+Beamer/*.synctex.gz
+Beamer/*.toc
+

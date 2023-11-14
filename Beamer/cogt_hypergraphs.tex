@@ -1,0 +1,853 @@
+\documentclass[10pt, aspectratio=43]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{caption}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage[document]{ragged2e}
+\makeatletter
+\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
+\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
+\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
+\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
+\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
+\makeatother
+
+% \beamerdefaultoverlayspecification{<+->}
+
+\newcommand{\X}{\mathrm{\mathbf{X}}}
+\newcommand{\Y}{\mathrm{\mathbf{Y}}}
+\newcommand{\I}{\mathsf{I}}
+\renewcommand{\O}{\mathsf{O}}
+\renewcommand{\S}{\mathrm{\mathbf{S}}}
+\newcommand{\W}{\mathsf{W}}
+\newcommand{\V}{\mathrm{V}}
+
+\newcommand{\defeq}{\overset{\textsf{def}}{=}}
+
+\usepackage{datetime}
+\usepackage{nameref}
+
+\definecolor{bda}{HTML}{00B388}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{patterns.meta}
+\usetikzlibrary{calc}
+
+\usepackage{float}
+\usepackage{multicol}
+
+\definecolor{magenta}{rgb}{1.0, 0.0, 1.0}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{antiquebrass}{rgb}{0.8, 0.58, 0.46}
+\definecolor{darkturquoise}{rgb}{0.0, 0.81, 0.82}
+\definecolor{darkpastelgreen}{rgb}{0.01, 0.75, 0.24}
+\definecolor{darktangerine}{rgb}{1.0, 0.66, 0.07}
+\definecolor{richcarmine}{rgb}{0.84, 0.0, 0.25}
+\definecolor{majorelleblue}{rgb}{0.38, 0.31, 0.86}
+\definecolor{magenta}{rgb}{1.0, 0.0, 1.0}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{ferrarired}{rgb}{1.0, 0.11, 0.0}
+\definecolor{battleshipgrey}{rgb}{0.52, 0.52, 0.51}
+\definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
+\definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+
+\usetheme{EastLansing}
+
+\setbeamertemplate{section in toc}[square]
+
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{bondiblue}{rgb}{0.0, 0.58, 0.71}
+
+\newtheorem*{conj*}{Conjecture}
+\newtheorem*{lmm*}{Lemme}
+
+\setbeamercovered{transparent}
+\makeatother
+\author{Benoît \textsc{Bompol}, Armand \textsc{Grenier}}
+\subtitle{Combinatorial Optimization and Graph Theory}
+\title{\textsf{\textbf{Directed hypergraph connectivity augmentation by hyperarc re-orientations}}}
+\date{Thursday, Nov 23rd 2023}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+	
+	\begin{frame}{Table of contents}
+		\tableofcontents
+	\end{frame}
+	
+	\section{Introduction}
+	\subsection{Connectivity problems, characterisations}
+	\begin{frame}{State of the art, goal of the article}
+		\begin{itemize}
+			\visible<2->{\item \textit{Nash-Williams}, 1960 :}
+			\visible<2->{\begin{itemize}
+					\item $G$ is $2k$-edge connected $\iff$ $G$ admits a $k$-arc-connected orientation.
+			\end{itemize}}
+			
+			\visible<3->{\item \textit{Ito et al.}, 2023 : }
+			\visible<3->{\begin{itemize}
+					\item Algorithmic proof of \textit{Nash-Williams}, by flipping one edge at a time.
+					\item Exhibiting a sequence of orientations such that :
+					\begin{itemize}
+						\item The arc-connectivity does not decrease, and the arc-connectivity of the last element of the sequence is $k$.
+						\item The next orientation in the sequence can be obtained from the previous one by flipping exactly one edge.
+						\item The sequence can be obtained in polynomial time (in the size of the directed graph).
+					\end{itemize}
+			\end{itemize}}
+		\end{itemize}
+		
+		\visible<4->{Goal of the article : Expanding the result of \textbf{Ito et al.} to hypergraphs.\\}
+		\visible<5->{Side note : This article generalise the results of \textbf{Ito et al.}, as directed graphs are special case of hypergraphs.}
+	\end{frame}
+	
+	\subsection{Hypergraphs}
+	\begin{frame}{Hypergraphs}    
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\def\radius{2.5}
+				\coordinate (A) at (60:\radius);
+				\coordinate (B) at (0:\radius);
+				\coordinate (C) at (300:\radius);
+				\coordinate (D) at (240:\radius);
+				\coordinate (E) at (180:\radius);
+				\coordinate (F) at (120:\radius);
+				
+				\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$};
+				\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+				\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$};
+				\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
+				\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
+				\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
+				
+				
+				\visible<1->{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=-45, in=105] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=15, in=165] (A);
+				}
+				
+				\visible<4->{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=195, in=-15] (F);            \draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=4pt] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=15, in=165] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=-45, in=105] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=-105, in=45] (E);
+				}
+				
+				\visible<2->{
+					% {AC -> B}
+					\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+					\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+				}
+				
+				
+				\visible<4->{
+					% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {}   (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 4pt] (ab) to [out = 0, in = -30] (C);
+				}
+				
+				\visible<3->{
+					% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 4pt] (bc) to [out = 150, in = 45] (D);
+				}
+				
+				\visible<4->{
+					% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 4pt] (cd) to [out = -90, in = -120] (E);
+				}
+				
+				\visible<4->{
+					% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {}     (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+					\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 4pt] (de) to [out = 30, in = -75] (F);
+				}
+				
+				\visible<4->{
+					% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 4pt] (ef) to [out = 120, in = 120] (A);
+				}
+				
+				\visible<4->{
+					% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {}     (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 4pt] (fa) to [out = -90, in = 150] (B);
+				}
+			\end{tikzpicture}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}{Degree of $\varnothing\not=\mathsf{X}\subsetneq V$}
+		$d_{\mathcal{H}}(\mathsf{X})$ is the number of hyperedges intersecting both $\mathsf{X}$ and $V\setminus\mathsf{X}$.
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\def\radius{2.5}
+				\coordinate (A) at (60:\radius);
+				\coordinate (B) at (0:\radius);
+				\coordinate (C) at (300:\radius);
+				\coordinate (D) at (240:\radius);
+				\coordinate (E) at (180:\radius);
+				\coordinate (F) at (120:\radius);
+				
+				\node[above right=2pt] at (A) {$A$}; \fill (A) circle (2pt); \visible<2->{\fill[alizarin] (A) circle (4pt);}
+				\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+				\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$};
+				\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
+				\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
+				\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
+				
+				
+				\visible<-2>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=4pt] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=15, in=165] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=-45, in=105] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=-105, in=45] (E);
+				}
+				
+				\visible<-3>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=-45, in=105] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=195, in=-15] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=15, in=165] (A);
+				}
+				
+				\visible<-3>{
+					% {AC -> B}
+					\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+					\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+					
+					% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 4pt] (ab) to [out = 0, in = -30] (C);
+					
+					% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 4pt] (bc) to [out = 150, in = 45] (D);
+				}
+				
+				\visible<-2>{
+					% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 4pt] (cd) to [out = -90, in = -120] (E);
+					
+					% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+					
+					\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 4pt] (de) to [out = 30, in = -75] (F);
+				}
+				
+				\visible<-3>{
+					% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 4pt] (ef) to [out = 120, in = 120] (A);
+					
+					% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {}  (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 4pt] (fa) to [out = -90, in = 150] (B);
+				}
+				
+			\end{tikzpicture}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}{Orientation of an hypergraph}
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\def\radius{2.5}
+				\coordinate (A) at (60:\radius);
+				\coordinate (B) at (0:\radius);
+				\coordinate (C) at (300:\radius);
+				\coordinate (D) at (240:\radius);
+				\coordinate (E) at (180:\radius);
+				\coordinate (F) at (120:\radius);
+				
+				\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$};
+				\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+				\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$};
+				\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
+				\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
+				\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
+				
+				\visible<-1>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=-45, in=105] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=15, in=165] (A);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=195, in=-15] (F);
+					
+					
+					% {AC -> B}
+					\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+					\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+					
+					
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=4pt] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=15, in=165] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=-45, in=105] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=-105, in=45] (E);
+					
+					% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 4pt] (ab) to [out = 0, in = -30] (C);
+					
+					% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 4pt] (bc) to [out = 150, in = 45] (D);
+					
+					% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 4pt] (cd) to [out = -90, in = -120] (E);
+					
+					% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+					
+					\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 4pt] (de) to [out = 30, in = -75] (F);
+					
+					% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 4pt] (ef) to [out = 120, in = 120] (A);
+					
+					% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 4pt] (fa) to [out = -90, in = 150] (B);}
+				
+				\visible<2>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+					
+					% {AC -> B}
+					\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+					\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
+					
+					
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+					
+					% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+					
+					% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+					
+					% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+					
+					% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+					
+					\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+					
+					% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+					
+					% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+				}
+				
+			\end{tikzpicture}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}{In-Degree of $\varnothing\not=\mathsf{X}\subsetneq V$}
+		$d^{-}_{\mathcal{H}}(\mathsf{X})$ is the number of hyperarcs $(\mathsf{Y}, v)$ such that : $v\in\mathsf{X}$, $\exists u \in \mathsf{Y}\setminus\mathsf{X}$.
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\def\radius{2.5}
+				\coordinate (A) at (60:\radius);
+				\coordinate (B) at (0:\radius);
+				\coordinate (C) at (300:\radius);
+				\coordinate (D) at (240:\radius);
+				\coordinate (E) at (180:\radius);
+				\coordinate (F) at (120:\radius);
+				
+				\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$}; \visible<2->{\fill[alizarin] (A) circle (4pt);}
+				\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+				\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$}; \visible<2->{\fill[alizarin] (C) circle (4pt);}
+				\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
+				\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
+				\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
+				
+				\visible<-2>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+				}
+				
+				\visible<-3>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+				}
+				
+				\visible<-2>{
+					% {AC -> B}
+					\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac)   {} (C);
+					\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
+				}
+				
+				\visible<-3>{
+					% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+				}
+				
+				\visible<-2>{
+					% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+				}
+				
+				\visible<-2>{
+					% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+				}
+				
+				\visible<-2>{
+					% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+					\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+				}
+				
+				\visible<-3>{
+					% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+				}
+				
+				\visible<-2>{
+					% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+				}
+			\end{tikzpicture}
+		\end{figure}
+		
+	\end{frame}
+	
+	\begin{frame}{Out-Degree of $\varnothing\not=\mathsf{X}\subsetneq V$}
+		$d^{+}_{\mathcal{H}}(\mathsf{X})$ is the number of hyperarcs $(\mathsf{Y}, v)$ such that $v\not\in\mathsf{X}$ and $\exists u \in \mathsf{Y}\cap\mathsf{X}$.
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\def\radius{2.5}
+				\coordinate (A) at (60:\radius);
+				\coordinate (B) at (0:\radius);
+				\coordinate (C) at (300:\radius);
+				\coordinate (D) at (240:\radius);
+				\coordinate (E) at (180:\radius);
+				\coordinate (F) at (120:\radius);
+				
+				\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$}; \visible<2->{\fill[alizarin] (A) circle (4pt);}
+				\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+				\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$}; \visible<2->{\fill[alizarin] (C) circle (4pt);}
+				\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
+				\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
+				\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
+				
+				\visible<-2>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+				}
+				
+				\visible<-3>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B); 
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+				}
+				
+				\visible<-3>{
+					% {AC -> B}
+					\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5]    (ac) {} (C);
+					\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
+				}
+				
+				\visible<-2>{
+					% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {}   (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+				}
+				
+				\visible<-3>{
+					% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+				}
+				
+				\visible<-3>{
+					% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd)   {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+				}
+				
+				\visible<-3>{
+					% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+				}
+				\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+				
+				\visible<-2>{
+					% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+				}
+				
+				\visible<-3>{
+					% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+				}
+				
+			\end{tikzpicture}
+		\end{figure}
+		
+	\end{frame}
+	
+	\begin{frame}{Hyperarc-connectivity and $(k, k)$-partition connected hypergraphs}
+		\begin{itemize}
+			\item $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}, if, $\forall{e}\in\mathcal{E}$, $d^{+}_{\vec{\mathcal{H}}}(e) \geq k$.
+			\item The hyperarc-connectivity of a graph, denoted $\lambda(\vec{\mathcal{H}})$, is the maximum value of $k$ such that $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}.
+			\visible<2->{\item The previous orientation given was 2-hyperarc-connected. {\visible<3>{There is a 3-hyperarc-connected orientation}}}
+		\end{itemize}
+		
+		\begin{itemize}
+			\visible<4->{\item  Let $\mathcal{P}$ be a partition of $V$ :}
+			\visible<4->{\item $e_{\mathcal{H}}(\mathcal{P})$ is the number of hyperedges intersecting at least 2 elements of $\mathcal{P}$}
+			\visible<5->{\item $\mathcal{H}$ is $(k,k)$-partition-connected, if : \begin{itemize}
+					\item $\forall\mathcal{P}, e_{\mathcal{H}}(\mathcal{P}) \geq k \times |\mathcal{P}| $
+			\end{itemize}}
+		\end{itemize}
+		\visible<6->{We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.}
+	\end{frame}
+	
+	\begin{frame}{Main result}
+		\begin{tcolorbox}[colback=bondiblue!5!white,colframe=bondiblue!75!black,title=Main result (Theorem 7)]
+			Let $\mathcal{H} = (V, E)$ be a $(k+1, k+1)$-partition-connected hypergraph and $\vec{\mathcal{H}}$ is a k-hyperarc orientation of $\mathcal{H}$. Then there exists a sequence of hyperarcs $(\vec{\mathcal{H}_{i}})_{i\in0\dots\ell}$ such that $\vec{\mathcal{H}}_{i+1}$ is obtained from $\vec{\mathcal{H}}_{i}$ by reorienting exactly one hyperarc and $\lambda(\vec{\mathcal{H}}_{i+1}) \geq \lambda(\vec{\mathcal{H}}_{i})$ and $\lambda(\vec{\mathcal{H}}_{\ell}) = k + 1$. Such a sequence of orientations can be obtained with $\ell \leq |V|^{3}$ and found in polynomial time (in the size of $\mathcal{H}$).
+		\end{tcolorbox}
+		\visible<2->{Generalization of \textbf{Ito et al.}, as digraphs are special cases of hypergraphs.}
+	\end{frame}
+	
+	\begin{frame}{"High-Level"-running of the algorithm}
+		Our algorithm will provide a 3-hyperarc-connected orientation of $\mathcal{H}$, starting from a 2-hyperarc-connected.
+		
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{figure}[H]
+					\centering
+					\begin{tikzpicture}
+						\def\radius{2}
+						\coordinate (A) at (60:\radius);
+						\coordinate (B) at (0:\radius);
+						\coordinate (C) at (300:\radius);
+						\coordinate (D) at (240:\radius);
+						\coordinate (E) at (180:\radius);
+						\coordinate (F) at (120:\radius);
+						
+						\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$}; \visible<2>{\fill[alizarin] (A) circle (4pt);} \visible<5>{\fill[caribbeangreen] (A) circle (3 pt);} \visible<13-18>{\fill[atomictangerine] (A) circle (3 pt);}
+						\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+						\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$}; \visible<5>{\fill[atomictangerine] (C) circle (3 pt);}
+						\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$}; \visible<9>{\fill[caribbeangreen] (D) circle (3 pt);}
+						\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$}; \visible<9>{\fill[atomictangerine] (E) circle (3 pt);}
+						\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$}; \visible<13-18>{\fill[caribbeangreen] (F) circle (3 pt);}
+						
+						\visible<-12>{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+						}
+						
+						\visible<13-17>{
+							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+						}
+						
+						\visible<18->{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (A) to [out=-45, in=105] (B);
+						}
+						
+						\visible<-12>{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+						}
+						\visible<13-16>{
+							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+						}
+						\visible<17->{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (B) to [out=-105, in=45] (C);
+						}
+					
+						\visible<-12>{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+						}
+						\visible<13-15>{
+							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+						}
+						\visible<16->{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (C) to [out=195, in=-15] (D);
+						}
+					
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+						
+						\visible<-4>{
+							% {AC -> B}
+							\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+							\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
+						}
+						\visible<5>{
+							% {AC -> B}
+							\draw[dashed, ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+							\draw[dashed, ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
+						}
+						\visible<6->{
+							% {AB -> C}
+							\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+							\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+						}
+						
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);
+						\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+						
+						\visible<-8>{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+						}
+						\visible<9>{
+							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+						}
+						\visible<10-12>{
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
+						}
+						\visible<13-14>{
+							\draw[dashed, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
+						}
+						\visible<15->{
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (E) to [out=-45, in=105] (D);
+						}
+						
+						\visible<-12>{
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+						}
+						\visible<13>{
+							\draw[dashed, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+						}
+						\visible<14->{
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (F) to [out=-105, in=45] (E);
+						}
+						
+						% {AB -> C}
+						\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+						\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+						
+						% {ABC -> D}
+						\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+						\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+						\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+						
+						% {CD -> E}
+						\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+						\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+						
+						% {CDE -> F}
+						\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+						\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+						
+						\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+						
+						% {EF -> A}
+						\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+						\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+						
+						% {FA -> B}
+						\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+						\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+						
+					\end{tikzpicture}
+				\end{figure}
+			\end{column}
+			\hfill
+			\begin{column}{0.5\textwidth}
+				\begin{enumerate}
+					\item <alert@2> Take $r$ in $V(\mathcal{H})$.
+					\item <alert@3,7,11,19> Compute sets of vertices.
+					\item <alert@20> Stopping Criteria
+					\item <alert@4,8,12> Select a set $R$ (cf. 2.)
+					\item <alert@5,9,13> \textbf<21>{Find an admissible $(s, t)$-hyperpath in $R$ to reorient}
+					\item <alert@6,10,14-18> Reorient the corresponding hyperpath.
+					\item <alert@7,11,19> \texttt{Goto} (2.)
+				\end{enumerate}
+			\end{column}
+		\end{columns}   
+	\end{frame}
+
+	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
+		\begin{itemize}
+			\item<1-> Crucial segment of the algorithm.
+			\item<2-> Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
+			\begin{enumerate}
+				\item<3-> $s$ is a {\color<4->{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color<4->{alizarin}safe sink} in $T\subseteq{R}$.
+				\item<5-> Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
+				\item<6-> After reorientation of $P$, there is a set whose cardinality is a guarantee that the algorithm will stop.
+			\end{enumerate}
+		\end{itemize}
+
+		\visible<7->{What are {\color{alizarin}safe sources} and {\color{alizarin}safe sinks} ?\\
+		\begin{flushright}
+			\textit{A brief detour...}
+		\end{flushright}}
+	\end{frame}
+
+	\begin{frame}{Tight and Dangerous sets}
+		\only<1>{
+			Remainder of the algorithm :
+			\begin{itemize}
+				\item<1->\texttt{Input} : A $k$-hyperarc-connected orientation of a $(k+1, k+1)$-partition-connected hypergraph.\\
+				\item<1->\texttt{Output} : A $k+1$-hyperarc-connected hypergraph.
+			\end{itemize}
+		}
+
+		\visible<2->{
+			\begin{columns}
+				\begin{column}{0.45\textwidth}
+					\begin{figure}[H]
+						\begin{tikzpicture}
+							\def\radius{0.75}
+							\def\smol{1}
+							\def\mid{1.5}
+							\def\Radius{2}
+
+							\coordinate (u) at (120:\radius);
+							\coordinate (U) at (120:\Radius);
+
+							\coordinate (v) at (90:\radius);
+							\coordinate (V) at (90:\Radius);
+
+							\coordinate (w) at (60:\radius);
+							\coordinate (W) at (60:\Radius);
+						
+							\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
+							\visible<3-5>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
+							\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
+							
+							\visible<-7>{\draw[thin] (0,0) circle (\mid);}
+							\visible<6->{\draw[thin, dashed] (0,0) circle (\smol);}
+										
+						\end{tikzpicture}
+
+						\caption*{\only<7->{Minimal }In-\only<2,6->{Tight}\only<3-5>{Dangerous} sets}
+					\end{figure}
+				\end{column}
+				\hfill\vrule\hfill
+				\begin{column}{0.45\textwidth}
+					\begin{figure}[H]
+						\begin{tikzpicture}
+							\def\radius{0.75}
+							\def\smol{1}
+							\def\mid{1.5}
+							\def\Radius{2}
+
+							\coordinate (u) at (120:\radius);
+							\coordinate (U) at (120:\Radius);
+
+							\coordinate (v) at (90:\radius);
+							\coordinate (V) at (90:\Radius);
+
+							\coordinate (w) at (60:\radius);
+							\coordinate (W) at (60:\Radius);
+						
+							\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
+							\visible<3-5>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
+							\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
+							
+							\visible<-7>{\draw[thin] (0,0) circle (\mid);}
+							\visible<6->{\draw[thin, dashed] (0,0) circle (\smol);}				
+						\end{tikzpicture}
+						\caption*{\only<7->{Minimal }Out-\only<2,6->{Tight}\only<3-5>{Dangerous} sets}
+					\end{figure}
+				\end{column}
+			\end{columns}
+		}
+
+		\only<2->{
+			\begin{itemize}
+				\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
+				\item ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
+				\item<3-6> ${\color{caribbeangreen}\mathcal{D}_{-}} = \{X \subseteq V - r, d^{-}(X) = k + 1\}$ 
+				\item<3-6> ${\color{atomictangerine}\mathcal{D}_{+}} = \{X \subseteq V - r, d^{+}(X) = k + 1\}$
+				\item<7-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
+				\item<7-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
+			\end{itemize}
+		}
+
+	\end{frame}
+
+\end{document}
