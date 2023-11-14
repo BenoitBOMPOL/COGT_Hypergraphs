@@ -29,6 +29,9 @@
 
 \newcommand{\X}{\mathsf{X}}
 \newcommand{\Y}{\mathsf{Y}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+
 
 \newcommand{\defeq}{\overset{\textsf{def}}{=}}
 
@@ -839,6 +842,63 @@
 				\item<7-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
 				\item<7-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
 			\end{itemize}
+		}
+
+	\end{frame}
+
+	\begin{frame}{Safe Sources and Safe Sinks}
+		Definitions are symmetric (but proofs are not).
+		\only<1-2>{\begin{itemize}
+			\item For $\S \in \mathcal{M}_{-}$, $s$ is a safe source in $\S$ if :\begin{itemize}
+				\item[a]<1,2>{For every $s\in{X}\in\mathcal{T}_{+}$, we have $\color{red}\S\subsetneq X$.}
+				\item[b]<2>{For every $s\in{X}\in\mathcal{D}_{+}$ such that $\S\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{+}$ such that $s\not\in{Y}\subsetneq{X}$.}
+			\end{itemize}
+		\end{itemize}
+		\begin{columns}
+			\begin{column}{0.45\textwidth}
+				\only<1,2>{
+					\begin{figure}[H]
+						\includegraphics[width=\textwidth]{claudia.jpg}
+						\caption*{a}
+					\end{figure}
+				}
+			\end{column}
+			\hfill\vrule\hfill
+			\begin{column}{0.45\textwidth}
+				\only<2>{
+					\begin{figure}[H]
+						\includegraphics[width=\textwidth]{claudia.jpg}
+						\caption*{b}
+					\end{figure}
+				}
+			\end{column}
+		\end{columns}
+		}
+		\only<3,4>{\begin{itemize}
+			\item For $\T \in \mathcal{M}_{+}$, $t$ is a safe source in $\T$ if :\begin{itemize}
+				\item[a]<3,4>{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}\T\subsetneq X$.}
+				\item[b]<4>{For every $t\in{X}\in\mathcal{D}_{-}$ such that $\T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
+			\end{itemize}
+		\end{itemize}
+		\begin{columns}
+			\begin{column}{0.45\textwidth}
+				\only<3,4>{
+					\begin{figure}[H]
+						\includegraphics[width=\textwidth]{claudia.jpg}
+						\caption*{c}
+					\end{figure}
+				}
+			\end{column}
+			\hfill\vrule\hfill
+			\begin{column}{0.45\textwidth}
+				\only<4>{
+					\begin{figure}[H]
+						\includegraphics[width=\textwidth]{claudia.jpg}
+						\caption*{d}
+					\end{figure}
+				}
+			\end{column}
+		\end{columns}
 		}
 
 	\end{frame}
