@@ -855,48 +855,134 @@
 			\end{itemize}
 		\end{itemize}
 		\begin{columns}
-			\begin{column}{0.45\textwidth}
+			\begin{column}{0.35\textwidth}
 				\only<1,2>{
 					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{claudia.jpg}
-						\caption*{a}
+						\begin{tikzpicture}
+							\def\smolrad{0.6}
+							\def\midrad{1.1}
+							\def\intrad{1.4}
+							\def\bigrad{1.7}
+
+							\coordinate (s) at (-60:\smolrad);
+							\fill (s) circle (2pt);
+							\node[above right=1pt] at (s) {$s$};
+
+							\coordinate (S) at (60:\midrad);
+							\node[above right] at (S) {$\color{caribbeangreen}S$};
+
+							\coordinate (X) at (120:\bigrad);
+							\node[above left] at (X) {$\color{atomictangerine}{X}$};
+
+							\coordinate (x) at (120:\intrad);
+							\fill[atomictangerine] (x) circle (2pt);
+
+							\draw[thick, caribbeangreen, dashed] (0,0) circle (\midrad);
+							\draw[ultra thick, atomictangerine] (0,0) circle (\bigrad);
+						\end{tikzpicture}
+						\caption*{Condition (a)}
 					\end{figure}
 				}
 			\end{column}
 			\hfill\vrule\hfill
-			\begin{column}{0.45\textwidth}
+			\begin{column}{0.60\textwidth}
 				\only<2>{
 					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{claudia.jpg}
-						\caption*{b}
+						\begin{tikzpicture}
+							\def\ssmolrad{0.3}
+							\def\smolrad{0.6}
+							\def\midrad{1.1}
+							\def\intrad{1.4}
+							\def\bigrad{1.7}
+
+							\coordinate (s) at (0:\ssmolrad);
+							\fill (s) circle (2pt);
+							\node[above right=1pt] at (s) {$s$};
+
+							\coordinate (S) at (120:\intrad);
+							\node[above left] at (S) {$\color{caribbeangreen}S$};
+
+							\fill(120:\midrad) circle (2pt);
+
+							\node at (60:{1.2*\bigrad}) {$\color{atomictangerine}X$};
+							\node at (0:{1.3*\bigrad}) {$\color{atomictangerine}\mathbf{Y}$};
+							
+							\draw[thick, caribbeangreen, dashed] (0,0) circle (\intrad);
+
+							\coordinate (cE) at (0:\intrad);
+							\draw[very thick, atomictangerine, dashdotted] (cE) circle (\intrad);
+							\draw[ultra thick, atomictangerine] (cE) circle (\smolrad);
+						\end{tikzpicture}
+						\caption*{Condition (b)}
 					\end{figure}
 				}
 			\end{column}
 		\end{columns}
 		}
-		\only<3,4>{\begin{itemize}
+		\only<3>{\begin{itemize}
 			\item For $\T \in \mathcal{M}_{+}$, $t$ is a safe sink in $\T$ if :\begin{itemize}
-				\item[c]<3,4>{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}\T\subsetneq X$.}
-				\item[d]<4>{For every $t\in{X}\in\mathcal{D}_{-}$ such that $\T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
+				\item[c]{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}\T\subsetneq X$.}
+				\item[d]{For every $t\in{X}\in\mathcal{D}_{-}$ such that $\T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
 			\end{itemize}
 		\end{itemize}
 		\begin{columns}
-			\begin{column}{0.45\textwidth}
-				\only<3,4>{
-					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{claudia.jpg}
-						\caption*{c}
-					\end{figure}
-				}
+			\begin{column}{0.35\textwidth}
+				\begin{figure}[H]
+					\begin{tikzpicture}
+						\def\smolrad{0.6}
+						\def\midrad{1.1}
+						\def\intrad{1.4}
+						\def\bigrad{1.7}
+
+						\coordinate (t) at (-60:\smolrad);
+						\fill (t) circle (2pt);
+						\node[above right=1pt] at (t) {$t$};
+
+						\coordinate (T) at (60:\midrad);
+						\node[above right] at (T) {$\color{atomictangerine}T$};
+
+						\coordinate (X) at (120:\bigrad);
+						\node[above left] at (X) {$\color{caribbeangreen}{X}$};
+
+						\coordinate (x) at (120:\intrad);
+						\fill[caribbeangreen] (x) circle (2pt);
+
+						\draw[thick, atomictangerine, dashed] (0,0) circle (\midrad);
+						\draw[thick, caribbeangreen] (0,0) circle (\bigrad);
+					\end{tikzpicture}
+					\caption*{Condition (c)}
+				\end{figure}
 			\end{column}
 			\hfill\vrule\hfill
-			\begin{column}{0.45\textwidth}
-				\only<4>{
-					\begin{figure}[H]
-						\includegraphics[width=\textwidth]{claudia.jpg}
-						\caption*{d}
-					\end{figure}
-				}
+			\begin{column}{0.60\textwidth}
+				\begin{figure}[H]
+					\begin{tikzpicture}
+						\def\ssmolrad{0.3}
+						\def\smolrad{0.6}
+						\def\midrad{1.1}
+						\def\intrad{1.4}
+						\def\bigrad{1.7}
+
+						\coordinate (t) at (0:\ssmolrad);
+						\fill (t) circle (2pt);
+						\node[above right=1pt] at (t) {$t$};
+
+						\coordinate (T) at (120:\intrad);
+						\node[above left] at (T) {$\color{atomictangerine}T$};
+
+						\fill(120:\midrad) circle (2pt);
+
+						\node at (60:{1.2*\bigrad}) {$\color{caribbeangreen}X$};
+						\node at (0:{1.3*\bigrad}) {$\color{caribbeangreen}\mathbf{Y}$};
+						
+						\draw[thick, atomictangerine, dashed] (0,0) circle (\intrad);
+
+						\coordinate (cE) at (0:\intrad);
+						\draw[very thick, caribbeangreen, dashdotted] (cE) circle (\intrad);
+						\draw[ultra thick, caribbeangreen] (cE) circle (\smolrad);
+					\end{tikzpicture}
+					\caption*{Condition (d)}
+				\end{figure}
 			\end{column}
 		\end{columns}
 		}
