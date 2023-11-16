@@ -849,9 +849,9 @@
 	\begin{frame}{Safe Sources and Safe Sinks}
 		Definitions are symmetric (but proofs are not).
 		\only<1-2>{\begin{itemize}
-			\item For $\S \in \mathcal{M}_{-}$, $s$ is a safe source in $\S$ if :\begin{itemize}
-				\item[a]<1,2>{For every $s\in{X}\in\mathcal{T}_{+}$, we have $\color{red}\S\subsetneq X$.}
-				\item[b]<2>{For every $s\in{X}\in\mathcal{D}_{+}$ such that $\S\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{+}$ such that $s\not\in{Y}\subsetneq{X}$.}
+			\item For $S \in \mathcal{M}_{-}$, $s$ is a safe source in $S$ if :\begin{itemize}
+				\item[a]<1,2>{For every $s\in{X}\in\mathcal{T}_{+}$, we have $\color{red} S\subsetneq X$.}
+				\item[b]<2>{For every $s\in{X}\in\mathcal{D}_{+}$ such that $S\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{+}$ such that $s\not\in{Y}\subsetneq{X}$.}
 			\end{itemize}
 		\end{itemize}
 		\begin{columns}
@@ -920,9 +920,9 @@
 		\end{columns}
 		}
 		\only<3>{\begin{itemize}
-			\item For $\T \in \mathcal{M}_{+}$, $t$ is a safe sink in $\T$ if :\begin{itemize}
-				\item[c]{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}\T\subsetneq X$.}
-				\item[d]{For every $t\in{X}\in\mathcal{D}_{-}$ such that $\T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
+			\item For $T \in \mathcal{M}_{+}$, $t$ is a safe sink in $T$ if :\begin{itemize}
+				\item[c]{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}T\subsetneq X$.}
+				\item[d]{For every $t\in{X}\in\mathcal{D}_{-}$ such that $T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
 			\end{itemize}
 		\end{itemize}
 		\begin{columns}
@@ -989,9 +989,20 @@
 		Finding a safe sink $t$ in $T\in\mathcal{M}_{+}$ can be done by checking each vertex if they correspond to the definition.
 	\end{frame}
 
-	\begin{frame}{Do safe sources and safe sinks always exist ?}
-		\visible<2>{yes.}
-		\visible<3>{Quick Sketch of the proof}
+	\begin{frame}{Existence of a safe source (\textit{a safe sink})}
+		\begin{block}{Lemma 10}$\forall{S}\in\mathcal{M}_{-}, \text{ there is a safe source }s\in{S}.$\end{block}
+		Likewise,
+		\begin{block}{Lemma 11}$\forall{T}\in\mathcal{M}_{+}, \text{ there is a safe sink }t\in{T}.$\end{block}
+
+		\begin{block}
+			{Quick sketch of a proof for \textsf{Lemma 10} :}
+			\begin{itemize}
+				\item Let $S\in\mathcal{M}_{-}$.
+				\item Considering a family of vertex sets ($\chi$) that cover as many vertices of $S$ as possible, but using as little as vertex sets possible.
+				\item We can prove that, under given assumptions, $\chi$ cannot cover every vertex of $S$.
+				\item Vertices that are not covered by $\chi$ are "potential" safe sources, the last part of the proof is verifying that they are effectively safe sources.
+			\end{itemize}
+		\end{block}
 	\end{frame}
 
 \end{document}
