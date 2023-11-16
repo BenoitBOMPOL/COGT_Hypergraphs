@@ -1,0 +1,14 @@
+-> Admissible Hyperpath (le retour)
+	- More on stopping condition
+
+-> Q_{v}+
+	- Unicity
+	- (Lemma 12a) An hyperpath starting at v does not leave Qv+
+
+-> Alg2:
+	- Presentation
+	
+-> Admissibility of an hyperpath :
+	-> Lemma 16
+
+-> A few words on complexity

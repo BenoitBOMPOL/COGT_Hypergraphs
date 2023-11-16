@@ -791,15 +791,15 @@
 							\coordinate (W) at (60:\Radius);
 						
 							\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
-							\visible<3-4>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
+							\visible<3>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
 							\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
 							
-							\visible<-6>{\draw[thin] (0,0) circle (\mid);}
-							\visible<6->{\draw[thin, dashed] (0,0) circle (\smol);}
+							\visible<-5>{\draw[thin] (0,0) circle (\mid);}
+							\visible<5->{\draw[thin, dashed] (0,0) circle (\smol);}
 										
 						\end{tikzpicture}
 
-						\caption*{\only<6->{Minimal }In-\only<2,5->{Tight}\only<3-4>{Dangerous} sets}
+						\caption*{\only<5->{Minimal }In-\only<2,4->{Tight}\only<3>{Dangerous} sets}
 					\end{figure}
 				\end{column}
 				\hfill\vrule\hfill
@@ -821,13 +821,13 @@
 							\coordinate (W) at (60:\Radius);
 						
 							\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
-							\visible<3-4>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
+							\visible<3>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
 							\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
 							
-							\visible<-6>{\draw[thin] (0,0) circle (\mid);}
-							\visible<6->{\draw[thin, dashed] (0,0) circle (\smol);}				
+							\visible<-5>{\draw[thin] (0,0) circle (\mid);}
+							\visible<5->{\draw[thin, dashed] (0,0) circle (\smol);}				
 						\end{tikzpicture}
-						\caption*{\only<6->{Minimal }Out-\only<2,5->{Tight}\only<3-4>{Dangerous} sets}
+						\caption*{\only<5->{Minimal }Out-\only<2,4->{Tight}\only<3>{Dangerous} sets}
 					\end{figure}
 				\end{column}
 			\end{columns}
@@ -837,11 +837,11 @@
 			\begin{itemize}
 				\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
 				\item ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
-				\item<3-4> ${\color{caribbeangreen}\mathcal{D}_{-}} = \{X \subseteq V - r, d^{-}(X) = k + 1\}$ 
-				\item<3-4> ${\color{atomictangerine}\mathcal{D}_{+}} = \{X \subseteq V - r, d^{+}(X) = k + 1\}$
-				\item<6-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
-				\item<6-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
-				\item<6-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
+				\item<3> ${\color{caribbeangreen}\mathcal{D}_{-}} = \{X \subseteq V - r, d^{-}(X) = k + 1\}$ 
+				\item<3> ${\color{atomictangerine}\mathcal{D}_{+}} = \{X \subseteq V - r, d^{+}(X) = k + 1\}$
+				\item<5-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
+				\item<5-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
+				\item<5-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
 			\end{itemize}
 		}
 
