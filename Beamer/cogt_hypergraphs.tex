@@ -574,7 +574,7 @@
 	\begin{frame}{Hyperarc-connectivity and $(k, k)$-partition connected hypergraphs}
 		\begin{itemize}
 			\item $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}, if, $\forall{e}\in\mathcal{E}$, $d^{+}_{\vec{\mathcal{H}}}(e) \geq k$.
-			\item The hyperarc-connectivity of a graph, denoted $\lambda(\vec{\mathcal{H}})$, is the maximum value of $k$ such that $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}.
+			\item The hyperarc-connectivity of a hypergraph, denoted $\lambda(\vec{\mathcal{H}})$, is the maximum value of $k$ such that $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}.
 			\visible<2->{\item The previous orientation given was 2-hyperarc-connected. {\visible<3>{There is a 3-hyperarc-connected orientation}}}
 		\end{itemize}
 		
@@ -791,15 +791,15 @@
 							\coordinate (W) at (60:\Radius);
 						
 							\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
-							\visible<3-5>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
+							\visible<3-4>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
 							\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
 							
-							\visible<-7>{\draw[thin] (0,0) circle (\mid);}
+							\visible<-6>{\draw[thin] (0,0) circle (\mid);}
 							\visible<6->{\draw[thin, dashed] (0,0) circle (\smol);}
 										
 						\end{tikzpicture}
 
-						\caption*{\only<7->{Minimal }In-\only<2,6->{Tight}\only<3-5>{Dangerous} sets}
+						\caption*{\only<6->{Minimal }In-\only<2,5->{Tight}\only<3-4>{Dangerous} sets}
 					\end{figure}
 				\end{column}
 				\hfill\vrule\hfill
@@ -821,13 +821,13 @@
 							\coordinate (W) at (60:\Radius);
 						
 							\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
-							\visible<3-5>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
+							\visible<3-4>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
 							\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
 							
-							\visible<-7>{\draw[thin] (0,0) circle (\mid);}
+							\visible<-6>{\draw[thin] (0,0) circle (\mid);}
 							\visible<6->{\draw[thin, dashed] (0,0) circle (\smol);}				
 						\end{tikzpicture}
-						\caption*{\only<7->{Minimal }Out-\only<2,6->{Tight}\only<3-5>{Dangerous} sets}
+						\caption*{\only<6->{Minimal }Out-\only<2,5->{Tight}\only<3-4>{Dangerous} sets}
 					\end{figure}
 				\end{column}
 			\end{columns}
@@ -837,10 +837,11 @@
 			\begin{itemize}
 				\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
 				\item ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
-				\item<3-6> ${\color{caribbeangreen}\mathcal{D}_{-}} = \{X \subseteq V - r, d^{-}(X) = k + 1\}$ 
-				\item<3-6> ${\color{atomictangerine}\mathcal{D}_{+}} = \{X \subseteq V - r, d^{+}(X) = k + 1\}$
-				\item<7-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
-				\item<7-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
+				\item<3-4> ${\color{caribbeangreen}\mathcal{D}_{-}} = \{X \subseteq V - r, d^{-}(X) = k + 1\}$ 
+				\item<3-4> ${\color{atomictangerine}\mathcal{D}_{+}} = \{X \subseteq V - r, d^{+}(X) = k + 1\}$
+				\item<6-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
+				\item<6-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
+				\item<6-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
 			\end{itemize}
 		}
 
@@ -1004,5 +1005,21 @@
 			\end{itemize}
 		\end{block}
 	\end{frame}
+
+	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
+		\begin{itemize}
+			\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
+			\begin{enumerate}
+				\item $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
+				\item Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
+				\item Let $\vec{\mathcal{H}'}$ the hypergraph obtained after reorientation of $P$.\begin{itemize}
+					\item $\mathcal{M}'$ : Inclusion-wise minimal members of $\mathcal{M}'_{-}\cup\mathcal{M}'_{+}$
+					\item Either $|\mathcal{M}'| < |\mathcal{M}|$, either $|\mathcal{M}'| = |\mathcal{M}|$ and $\mathcal{M}'$ covers more vertices than $\mathcal{M}$.
+				\end{itemize}
+			\end{enumerate}
+		\end{itemize}
+	\end{frame}
+
+
 
 \end{document}
