@@ -105,11 +105,11 @@
 			
 			\visible<3->{\item \textit{Ito and al.}, 2023 : }
 			\visible<3->{\begin{itemize}
-					\item Algorithmic proof of \textit{Nash-Williams}, by flipping one edge at a time.
+					\item Algorithmic proof of \textit{Nash-Williams}, by flipping one arc at a time.
 					\item Exhibiting a sequence of orientations such that :
 					\begin{itemize}
 						\item The arc-connectivity does not decrease, and the arc-connectivity of the last element of the sequence is $k$.
-						\item The next orientation in the sequence can be obtained from the previous one by flipping exactly one edge.
+						\item The next orientation in the sequence can be obtained from the previous one by flipping exactly one arc.
 						\item The sequence can be obtained in polynomial time (in the size of the directed graph).
 					\end{itemize}
 			\end{itemize}}
@@ -573,9 +573,9 @@
 	
 	\begin{frame}{Hyperarc-connectivity and $(k, k)$-partition connected hypergraphs}
 		\begin{itemize}
-			\item $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}, if, $\forall{e}\in\mathcal{E}$, $d^{+}_{\vec{\mathcal{H}}}(e) \geq k$.
+			\item $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}, if, $\forall\varnothing\not=X\subsetneq V$, $d^{+}_{\vec{\mathcal{H}}}(X) \geq k$.
 			\item The hyperarc-connectivity of a hypergraph, denoted $\lambda(\vec{\mathcal{H}})$, is the maximum value of $k$ such that $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}.
-			\visible<2->{\item The previous orientation given was 2-hyperarc-connected. {\visible<3>{There is a 3-hyperarc-connected orientation}}}
+			\visible<2->{\item The previous orientation given was 2-hyperarc-connected. {\visible<3>{There is a 3-hyperarc-connected orientation of such an hypergraph.}}}
 		\end{itemize}
 		
 		\begin{itemize}
@@ -590,7 +590,7 @@
 	
 	\begin{frame}{Main result}
 		\begin{tcolorbox}[colback=bondiblue!5!white,colframe=bondiblue!75!black,title=Main result (Theorem 7)]
-			Let $\mathcal{H} = (V, E)$ be a $(k+1, k+1)$-partition-connected hypergraph and $\vec{\mathcal{H}}$ is a k-hyperarc orientation of $\mathcal{H}$. Then there exists a sequence of hyperarcs $(\vec{\mathcal{H}_{i}})_{i\in0\dots\ell}$ such that $\vec{\mathcal{H}}_{i+1}$ is obtained from $\vec{\mathcal{H}}_{i}$ by reorienting exactly one hyperarc and $\lambda(\vec{\mathcal{H}}_{i+1}) \geq \lambda(\vec{\mathcal{H}}_{i})$ and $\lambda(\vec{\mathcal{H}}_{\ell}) = k + 1$. Such a sequence of orientations can be obtained with $\ell \leq |V|^{3}$ and found in polynomial time (in the size of $\mathcal{H}$).
+			Let $\mathcal{H} = (V, E)$ be a $(k+1, k+1)$-partition-connected hypergraph and $\vec{\mathcal{H}}$ is a k-hyperarc connected orientation of $\mathcal{H}$. Then there exists a sequence of hypergraphs $(\vec{\mathcal{H}_{i}})_{i\in0\dots\ell}$ such that $\vec{\mathcal{H}}_{i+1}$ is obtained from $\vec{\mathcal{H}}_{i}$ by reorienting exactly one hyperarc and $\lambda(\vec{\mathcal{H}}_{i+1}) \geq \lambda(\vec{\mathcal{H}}_{i})$ and $\lambda(\vec{\mathcal{H}}_{\ell}) = k + 1$. Such a sequence of orientations can be obtained with $\ell \leq |V|^{3}$ and found in polynomial time (in the size of $\mathcal{H}$).
 		\end{tcolorbox}
 		\visible<2->{Generalization of \textbf{Ito and al.}, as digraphs are special cases of hypergraphs.}
 	\end{frame}
