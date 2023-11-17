@@ -1006,30 +1006,28 @@
 		\end{block}
 	\end{frame}
 
-	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
+	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
+		$\mathcal{R}$ : $R\subseteq V - r$ inclusion-wise minimal such that either :
 		\begin{itemize}
-			\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
-			\begin{itemize}
-				\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.\begin{itemize}
-					\item The hyperpath obtained does not leave given sets.
-				\end{itemize}
-				\item[2.] Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.{\begin{itemize}
-					\item At the end, we will prove part of this statement.
-				\end{itemize}}
-				\item[3.] Let $\vec{\mathcal{H}'}$ the hypergraph obtained after reorientation of $P$.\begin{itemize}
-					\item $\mathcal{M}'$ : Inclusion-wise minimal members of $\mathcal{M}'_{-}\cup\mathcal{M}'_{+}$
-					\item Either $|\mathcal{M}'| < |\mathcal{M}|$, either $|\mathcal{M}'| = |\mathcal{M}|$ and $\mathcal{M}'$ covers more vertices than $\mathcal{M}$.
-				\end{itemize}
+			\item $R\in{\color{caribbeangreen}\mathcal{T}_{-}}$, and contains a member of ${\color{atomictangerine}\mathcal{T}_{+}}$
+			\item or $R\in{\color{atomictangerine}\mathcal{T}_{+}}$, and contains a member of ${\color{caribbeangreen}\mathcal{T}_{-}}$.
+		\end{itemize}
+		\ \newline
+		Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
+		\begin{itemize}
+			\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
+			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
+			\item[3.] Let $\vec{\mathcal{H}'}$ the hypergraph obtained after reorientation of $P$.\begin{itemize}
+				\item $\mathcal{M}'$ : Inclusion-wise minimal members of $\mathcal{M}'_{-}\cup\mathcal{M}'_{+}$
+				\item Either $|\mathcal{M}'| < |\mathcal{M}|$, either $|\mathcal{M}'| = |\mathcal{M}|$ and $\mathcal{M}'$ covers more vertices than $\mathcal{M}$.
 			\end{itemize}
 		\end{itemize}
-
+		\ \newline
 		Point {\color{majorelleblue}3.} is the stopping criteria for the main algorithm :
 		\begin{itemize}
 			\item $\mathcal{M} = \{V\}$ implies both ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
 			\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
-			\item ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
 			\item ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
-			\item ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
 			\item Finally, if $\lambda(\vec{\mathcal{H}}) \geq k$ and ${\color{caribbeangreen}\mathcal{T}_{-}} = {\color{atomictangerine}\mathcal{T}_{+}} = \{V\}$, $\vec{\mathcal{H}}$ is $(k+1)$-hyperarc-connected.
 		\end{itemize}
 	\end{frame}
@@ -1081,6 +1079,27 @@
 				\only<6>{$Q^{v+}_{1}\cap Q^{v+}_{2}$ is smaller (inclusion-wise) than $Q^{v+}_{1}$ and $Q^{v+}_{2}$.}
 			}
 		\end{figure}
+	\end{frame}
+
+	\begin{frame}{Hyperpaths that do not leave $Q^{v}_{+}$}
+		\begin{block}{Lemma 12 (a)}
+			$\forall{s}\in V, \forall{t}\in Q^{s}_{+}$, there exists an $(s, t)$-hyperpath that does not leave $Q^{s}_{+}$.
+		\end{block}
+
+		\begin{block}{Proof of {\color{majorelleblue}Lemma 12(a)}}
+			\begin{itemize}[<+->]
+				\item By contradiction, assume that there is $s\in{V}, t\in Q^{s}_{+}$ such that any $(s, t)$-hyperpath leaves $Q^{s}_{+}$.
+				\item There is $s\in Z\subseteq Q^{s}_{+}\setminus\{t\}$ such that any hyperarc leaving $Z$ will also leave $Q^{s}_{+}$.
+				\item We have the following inequalities{\begin{itemize}[<+->]
+					\item $d^{+}(Q^{s}_{+}) \geq d^{+}(Z)$
+					\item $d^{+}(Z) \geq k$, as $\mathcal{H}$ is $k$-hyperarc-connected.
+					\item $k = d^{+}(Q^{s}_{+})$ by definition.
+				\end{itemize}}
+				\item We can deduce that $d^{+}(Z) = k$, which automatically implies that $Z\in{\color{atomictangerine}\mathcal{T}_{+}}$.
+				\item $Q^{s}_{+}$ is not minimal, hence the contradiction.
+			\end{itemize}
+		\end{block}
+		
 	\end{frame}
 
 \end{document}
