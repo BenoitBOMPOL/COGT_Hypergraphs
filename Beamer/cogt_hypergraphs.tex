@@ -12,6 +12,7 @@
 \usepackage{appendixnumberbeamer}
 
 \usepackage{algorithm,algpseudocode}
+\usepackage{cancel}
 
 \usepackage[document]{ragged2e}
 \makeatletter
@@ -1034,7 +1035,7 @@
 			\item $R\in{\color{caribbeangreen}\mathcal{T}_{-}}$, and contains a member of ${\color{atomictangerine}\mathcal{T}_{+}}$
 			\item or $R\in{\color{atomictangerine}\mathcal{T}_{+}}$, and contains a member of ${\color{caribbeangreen}\mathcal{T}_{-}}$.
 		\end{itemize}
-		\only<2->{
+		\visible<2->{
 			\begin{block}{Lemma 13}
 				Let $R\in\mathcal{R}, S\in{\color{caribbeangreen}\mathcal{M}_{-}}, T\in{\color{atomictangerine}\mathcal{M}_{+}}$ such that $S,T\subseteq{R}$. Let $s$ be a safe source in $S$, $t$ a safe sink in $T$.\\
 				Then :
@@ -1045,6 +1046,54 @@
 			\end{block}
 		}
 		% TODO
+	\end{frame}
+
+	\begin{frame}{Towards hyperarc connectivity augmentation - Proof}
+		\only<1>{\begin{block}{Lemma 13}
+			Let $R\in\mathcal{R}, S\in{\color{caribbeangreen}\mathcal{M}_{-}}, T\in{\color{atomictangerine}\mathcal{M}_{+}}$ such that $S,T\subseteq{R}$. Let $s$ be a safe source in $S$, $t$ a safe sink in $T$.\\
+			Then :
+			\begin{itemize}
+				\item $\forall{X}\subseteq V-r$ such that $s\in X$, $t\not\in X$, we have $d^{+}(X) \geq k + 1$.
+				\item $\forall{X}\subseteq V-r$ such that $s\not\in X$, $t\in X$, we have $d^{-}(X) \geq k + 1$.
+			\end{itemize}
+		\end{block}}
+		\only<2->{
+			\begin{block}{Proof of Lemma 13}
+				By contradiction, either :
+				\begin{itemize}
+					\item[a.] $s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
+						\item[\only<-3>{a1.}\only<4->{\cancel{a1.}}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
+						\item[\only<-4>{a2.}\only<5->{\cancel{a2.}}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
+					\end{itemize}}
+					\item[b.] $s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
+						\item[\only<-5>{b1.}\only<6->{\cancel{b1.}}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
+						\item[\only<-5>{b2.}\only<6->{\cancel{b2.}}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
+					\end{itemize}}
+				\end{itemize}
+			\end{block}
+			\begin{itemize}
+				\item By {\color{alizarin}definition of a safe source}, $S\subsetneq X$.
+				\item By $t\in R\setminus X, R\in \mathcal{R}$, we have $X\not\subseteq R$, which implies $X\setminus R \not= \varnothing$.
+			\end{itemize}
+		}
+		\only<3>{{\color{majorelleblue} a1} : If $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$ :
+			\begin{itemize}
+				\item By using \textsf{Claim 1} on $X\in{\color{atomictangerine}\mathcal{T}_{+}}$ and on $R\in{\color{caribbeangreen}\mathcal{T}_{-}}$, we get $R\setminus X\in{\color{caribbeangreen} \mathcal{T}_{-}}$.
+				\item If $X\cap T\not=\varnothing${\begin{itemize}
+					\item $X\cap T \in {\color{atomictangerine} \mathcal{T}_{+}}$ , $T$ is no longer minimal, which is a contradiction.
+				\end{itemize}}
+				\item Hence $X\cap T=\varnothing$, and $T\subseteq R\setminus X$.
+				\item $R$ is not minimal, which is a contradiction.
+			\end{itemize}
+		}
+		\only<4>{{\color{majorelleblue} a2} : If $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ :
+			\begin{itemize}
+				\item By using \textsf{Claim 1} on $X, R$, we get $X\cap R\in{\color{atomictangerine}\mathcal{T}_{+}}$
+				\item $S\subseteq R\cap X$, $t\in R\setminus X$ suffice to show that $R\cap X \in \mathcal{R}$, with $R\setminus X\subsetneq R$, as $t\in R\setminus X$.
+				\item This contradicts that $R\in\mathcal{R}$.
+			\end{itemize}
+		}
+
 	\end{frame}
 
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
