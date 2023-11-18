@@ -30,7 +30,7 @@
 					\State $T = V'$
 					\State Take a safe sink $t\in T$
 					\State $P' = F[s, t]$
-					\State $P$ is the corresponding hypergraph in $\vec{\mathcal{H}}$ with respect to $P'$.
+					\State $P$ is the corresponding hyperpath in $\vec{\mathcal{H}}$, obtained with $P'$.
 					\State \textbf{\textsf{Return}} $S, T, s, t, P$
 				\end{algorithmic}
 				\label{alg_1}

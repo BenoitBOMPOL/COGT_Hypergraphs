@@ -742,8 +742,7 @@
 					\item <alert@7,11,19> \texttt{Goto} (2.)
 				\end{enumerate}
 			\end{column}
-		\end{columns}
-		\visible<21>{We consider until the end of the presentation $r\in{V}$ fixed.}	
+		\end{columns}	
 	\end{frame}
 
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
@@ -764,75 +763,65 @@
 	\end{frame}
 
 	\begin{frame}{Tight and Dangerous sets}
-		\only<1>{
-			Remainder of the algorithm :
-			\begin{itemize}
-				\item<1->\texttt{Input} : A $k$-hyperarc-connected orientation of a $(k+1, k+1)$-partition-connected hypergraph.\\
-				\item<1->\texttt{Output} : A $k+1$-hyperarc-connected hypergraph.
-			\end{itemize}
-		}
+		\begin{columns}
+			\begin{column}{0.45\textwidth}
+				\begin{figure}[H]
+					\begin{tikzpicture}
+						\def\radius{0.75}
+						\def\smol{1}
+						\def\mid{1.5}
+						\def\Radius{2}
 
-		\visible<2->{
-			\begin{columns}
-				\begin{column}{0.45\textwidth}
-					\begin{figure}[H]
-						\begin{tikzpicture}
-							\def\radius{0.75}
-							\def\smol{1}
-							\def\mid{1.5}
-							\def\Radius{2}
+						\coordinate (u) at (120:\radius);
+						\coordinate (U) at (120:\Radius);
 
-							\coordinate (u) at (120:\radius);
-							\coordinate (U) at (120:\Radius);
+						\coordinate (v) at (90:\radius);
+						\coordinate (V) at (90:\Radius);
 
-							\coordinate (v) at (90:\radius);
-							\coordinate (V) at (90:\Radius);
-
-							\coordinate (w) at (60:\radius);
-							\coordinate (W) at (60:\Radius);
+						\coordinate (w) at (60:\radius);
+						\coordinate (W) at (60:\Radius);
+					
+						\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
+						\visible<3>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
+						\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
 						
-							\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
-							\visible<3>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
-							\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
-							
-							\visible<-5>{\draw[thin] (0,0) circle (\mid);}
-							\visible<5->{\draw[thin, dashed] (0,0) circle (\smol);}
-										
-						\end{tikzpicture}
+						\visible<-5>{\draw[thin] (0,0) circle (\mid);}
+						\visible<5->{\draw[thin, dashed] (0,0) circle (\smol);}
+									
+					\end{tikzpicture}
 
-						\caption*{\only<5->{Minimal }In-\only<2,4->{Tight}\only<3>{Dangerous} sets}
-					\end{figure}
-				\end{column}
-				\hfill\vrule\hfill
-				\begin{column}{0.45\textwidth}
-					\begin{figure}[H]
-						\begin{tikzpicture}
-							\def\radius{0.75}
-							\def\smol{1}
-							\def\mid{1.5}
-							\def\Radius{2}
+					\caption*{\only<5->{Minimal }In-\only<2,4->{Tight}\only<3>{Dangerous} sets}
+				\end{figure}
+			\end{column}
+			\hfill\vrule\hfill
+			\begin{column}{0.45\textwidth}
+				\begin{figure}[H]
+					\begin{tikzpicture}
+						\def\radius{0.75}
+						\def\smol{1}
+						\def\mid{1.5}
+						\def\Radius{2}
 
-							\coordinate (u) at (120:\radius);
-							\coordinate (U) at (120:\Radius);
+						\coordinate (u) at (120:\radius);
+						\coordinate (U) at (120:\Radius);
 
-							\coordinate (v) at (90:\radius);
-							\coordinate (V) at (90:\Radius);
+						\coordinate (v) at (90:\radius);
+						\coordinate (V) at (90:\Radius);
 
-							\coordinate (w) at (60:\radius);
-							\coordinate (W) at (60:\Radius);
+						\coordinate (w) at (60:\radius);
+						\coordinate (W) at (60:\Radius);
+					
+						\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
+						\visible<3>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
+						\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
 						
-							\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
-							\visible<3>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
-							\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
-							
-							\visible<-5>{\draw[thin] (0,0) circle (\mid);}
-							\visible<5->{\draw[thin, dashed] (0,0) circle (\smol);}				
-						\end{tikzpicture}
-						\caption*{\only<5->{Minimal }Out-\only<2,4->{Tight}\only<3>{Dangerous} sets}
-					\end{figure}
-				\end{column}
-			\end{columns}
-		}
+						\visible<-5>{\draw[thin] (0,0) circle (\mid);}
+						\visible<5->{\draw[thin, dashed] (0,0) circle (\smol);}				
+					\end{tikzpicture}
+					\caption*{\only<5->{Minimal }Out-\only<2,4->{Tight}\only<3>{Dangerous} sets}
+				\end{figure}
+			\end{column}
+		\end{columns}
 
 		\only<2->{
 			\begin{itemize}
@@ -1014,9 +1003,9 @@
 	}
 
 	\begin{frame}{Existence of a safe source (\textit{a safe sink})}
-		\begin{block}{Lemma 10}$\forall{S}\in\mathcal{M}_{-}, \text{ there is a safe source }s\in{S}.$\end{block}
+		\begin{block}{Lemma 10}$\forall{S}\in{\color{caribbeangreen}\mathcal{M}_{-}}, \text{ there is a safe source }s\in{S}.$\end{block}
 		Likewise,
-		\begin{block}{Lemma 11}$\forall{T}\in\mathcal{M}_{+}, \text{ there is a safe sink }t\in{T}.$\end{block}
+		\begin{block}{Lemma 11}$\forall{T}\in{\color{atomictangerine}\mathcal{M}_{+}}, \text{ there is a safe sink }t\in{T}.$\end{block}
 
 		\begin{block}
 			{Quick outline of a proof for \textsf{Lemma 10} :}
@@ -1217,7 +1206,7 @@
 					\State $T = V'$
 					\State Take a safe sink $t\in T$
 					\State $P' = F[s, t]$
-					\State $P$ is the corresponding hypergraph in $\vec{\mathcal{H}}$ with respect to $P'$.
+					\State $P$ is the corresponding hyperpath in $\vec{\mathcal{H}}$, obtained with $P'$.
 					\State \textbf{\textsf{Return}} $S, T, s, t, P$
 				\end{algorithmic}
 				\label{alg_1}
