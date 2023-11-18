@@ -7,4 +7,4 @@ Beamer/*.out
 Beamer/*.snm
 Beamer/*.synctex.gz
 Beamer/*.toc
-
+Beamer/*.vrb

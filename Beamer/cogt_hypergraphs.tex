@@ -995,7 +995,7 @@
 		\begin{block}{Lemma 11}$\forall{T}\in\mathcal{M}_{+}, \text{ there is a safe sink }t\in{T}.$\end{block}
 
 		\begin{block}
-			{Quick sketch of a proof for \textsf{Lemma 10} :}
+			{Quick outline of a proof for \textsf{Lemma 10} :}
 			\begin{itemize}
 				\item Let $S\in\mathcal{M}_{-}$.
 				\item Considering a family of vertex sets ($\chi$) that cover as many vertices of $S$ as possible, but using as little as vertex sets possible.
@@ -1101,27 +1101,43 @@
 	\end{frame}
 
 	\begin{frame}[fragile]{Finding an admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
-		\begin{algorithm}[H]
-			\begin{algorithmic}[1]
-				\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
-				\State{Take a set $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, with $S\subseteq{R}$, then a safe source $s\in S$.}
-				\State{$Z = \{s\}$, $F = (Z, \varnothing)$, $V' = R$}
-				\While{$h = (X, v)$ exists such that $v\in V' - Z$ and $X\cap Z\not=\varnothing$}
-					\State Let $u\in X\cap{Z}$.
-					\State $Z \leftarrow Z\cup{v}$
-					\State $F \leftarrow F + uv$
-					\If{$Q^{v}_{+}\subsetneq V'$}
-						\State $V' \leftarrow Q^{v}_{+}$
-					\EndIf
-				\EndWhile
-				\State $T = V'$
-				\State Take a safe sink $t\in T$
-				\State $P' = F[s, t]$
-				\State $P$ is the corresponding hypergraph in $\vec{\mathcal{H}}$ with respect to $P'$.
-				\State \textbf{\textsf{Return}} $S, T, s, t, P$
-			\end{algorithmic}
-			\label{alg_1}
-		\end{algorithm}
+		\only<-7>{
+			\begin{itemize}[<+->]
+				\item[1.] Only input of the algorithm $R\in\mathcal{R}\in{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
+					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
+				\end{itemize}}
+
+				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, then a safe source $s\in S$.
+				\item[3.] Main part of the algorithm : $s$-out arborescence{\begin{itemize}
+					\item $F$ : (Directed) arborescence, rooted in $s$
+					\item $Z$ : Explored (yet) vertices
+					\item $V'$ : Allowed remaining vertices to explore
+				\end{itemize}}
+			\end{itemize}
+		}
+		\only<8->{
+			\begin{algorithm}[H]
+				\begin{algorithmic}[1]
+					\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
+					\State{Take a set $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, with $S\subseteq{R}$, then a safe source $s\in S$.}
+					\State{$Z = \{s\}$, $F = (Z, \varnothing)$, $V' = R$}
+					\While{$h = (X, v)$ exists such that $v\in V' - Z$ and $X\cap Z\not=\varnothing$}
+						\State Let $u\in X\cap{Z}$.
+						\State $Z \leftarrow Z\cup\{v\}$
+						\State $F \leftarrow F + uv$
+						\If{$Q^{v}_{+}\subsetneq V'$}
+							\State $V' \leftarrow Q^{v}_{+}$
+						\EndIf
+					\EndWhile
+					\State $T = V'$
+					\State Take a safe sink $t\in T$
+					\State $P' = F[s, t]$
+					\State $P$ is the corresponding hypergraph in $\vec{\mathcal{H}}$ with respect to $P'$.
+					\State \textbf{\textsf{Return}} $S, T, s, t, P$
+				\end{algorithmic}
+				\label{alg_1}
+			\end{algorithm}
+		}
 	\end{frame}
 
 \end{document}
