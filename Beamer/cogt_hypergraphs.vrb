@@ -5,7 +5,7 @@
 					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
 				\end{itemize}}
 
-				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, then a safe source $s\in S$.
+				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$ such that $S\subseteq{R}$, then a safe source $s\in S$.
 				\item[3.] Main part of the algorithm : $s$-out arborescence{\begin{itemize}
 					\item $F$ : (Directed) arborescence, rooted in $s$
 					\item $Z$ : Explored (yet) vertices

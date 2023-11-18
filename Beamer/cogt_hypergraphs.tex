@@ -14,6 +14,8 @@
 \usepackage{algorithm,algpseudocode}
 \usepackage{cancel}
 
+\usepackage{adjustbox}
+
 \usepackage[document]{ragged2e}
 \makeatletter
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
@@ -1210,7 +1212,7 @@
 			${\color{majorelleblue}a2.} : R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}, \exists X\subseteq V-r, s\in{X}, t\not\in{X}, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.
 			\begin{itemize}
 				\item[.] $R\in{\color{atomictangerine}\mathcal{T}_{+}}, X\in{\color{atomictangerine}\mathcal{T}_{+}}$, and $X\cap{R}\not=\varnothing \implies X\cap{R}\in{\color{atomictangerine}\mathcal{T}_{+}}$
-				\item[.] $S\in{\color{atomictangerine}\mathcal{T}_{-}}, S\subseteq R\cap{X}$. Since $r\in R\setminus X, X\cup R\subsetneq R$.
+				\item[.] $S\in{\color{atomictangerine}\mathcal{T}_{-}}, S\subseteq R\cap{X}$. Since $r\in R\setminus X, X\cap R\subsetneq R$.
 				\item[.] This contradicts the minimality of $R$.
 			\end{itemize}
 		}
@@ -1330,7 +1332,7 @@
 					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
 				\end{itemize}}
 
-				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, then a safe source $s\in S$.
+				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$ such that $S\subseteq{R}$, then a safe source $s\in S$.
 				\item[3.] Main part of the algorithm : $s$-out arborescence{\begin{itemize}
 					\item $F$ : (Directed) arborescence, rooted in $s$
 					\item $Z$ : Explored (yet) vertices
@@ -1360,6 +1362,104 @@
 				\end{algorithmic}
 				\label{alg_1}
 			\end{algorithm}
+		}
+	\end{frame}
+
+	\begin{frame}{A few words about complexity}
+		\begin{itemize}[<+->]
+			\item Computing $\mathcal{R}$, ${\color{caribbeangreen}\mathcal{M}_{-}}$, ${\color{atomictangerine}\mathcal{M}_{+}}$ in polynomial time :{\begin{itemize}
+				\item We can transform our hypergraph in a network (by trimming),
+				\item In which we can apply \textsf{\textbf{Edmonds-Karp}} to compute $(s, t)$-cuts.
+				\item It can be shown that $\mathcal{R}, \mathcal{M}_{-}, \mathcal{M}_{+}\in \mathcal{Q}$, with $\mathcal{Q}$ obtained while applying \textbf{\textsf{Edmonds-Karp}}.
+			\end{itemize}}
+			\item Finding an \textit{admissible} hyperpath runs in polynomial time :{\begin{itemize}
+				\item Simple search that runs in polynomial time of number of hyperedges
+				\item Finding a safe source and safe sink in polynomial time thanks to \textbf{\textsf{Edmonds-Karp}}.
+			\end{itemize}}
+			\item The main algorithm runs in polynomial time.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Conclusion}
+		\only<-3>{
+			\begin{alertblock}{Final words}
+				\begin{itemize}
+					\item Generalization to hypergraphs of a previous article (by \textbf{\textsf{Ito and al.}}).
+					\item Algorithmic Proof of Frank's characterisation of $(k, k)$-partition connected hypergraphs.
+					\item Extensions of \textsf{Theorem 7} (main result) : Starting without conditions on $\lambda(\vec{\mathcal{H}})$.
+				\end{itemize}
+			\end{alertblock}
+		}
+		
+		\only<4>{
+			\begin{alertblock}{Thank you for your attention}
+				\begin{figure}[H]
+					\centering
+					\begin{tikzpicture}
+					\def\radius{2.5}
+					\coordinate (A) at (60:\radius);
+					\coordinate (B) at (0:\radius);
+					\coordinate (C) at (300:\radius);
+					\coordinate (D) at (240:\radius);
+					\coordinate (E) at (180:\radius);
+					\coordinate (F) at (120:\radius);
+					
+					\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$};
+					\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
+					\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$};
+					\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
+					\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
+					\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
+				
+				
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (A) to [out=-45, in=105] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (B) to [out=-105, in=45] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+				
+					% {AC -> B} --> (AB -> C)
+						\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+						\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+				
+				
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (D) to [out=15, in=165] (C);
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (E) to [out=-45, in=105] (D); % double réorientation
+					\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (F) to [out=-105, in=45] (E);
+				
+						% {AB -> C}
+					\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+				
+						% {ABC -> D}
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+					\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+				
+						% {CD -> E}
+					\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+					\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+				
+						% {CDE -> F}
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+					\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+					
+					\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+				
+						% {EF -> A}
+					\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+					\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+				
+						% {FA -> B}
+					\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+					\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+					
+					\end{tikzpicture}
+				\end{figure}
+			\end{alertblock}
 		}
 	\end{frame}
 
