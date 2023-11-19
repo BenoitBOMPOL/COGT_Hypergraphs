@@ -577,17 +577,17 @@
 		\begin{itemize}
 			\item $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}, if, $\forall\varnothing\not=X\subsetneq V$, $d^{+}_{\vec{\mathcal{H}}}(X) \geq k$.
 			\item The hyperarc-connectivity of a hypergraph, denoted $\lambda(\vec{\mathcal{H}})$, is the maximum value of $k$ such that $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}.
-			\visible<2->{\item The previous orientation given was 2-hyperarc-connected. {\visible<3>{There is a 3-hyperarc-connected orientation of such an hypergraph.}}}
+			\visible<2->{\item The previous orientation given was 2-hyperarc-connected.}
 		\end{itemize}
 		
 		\begin{itemize}
-			\visible<4->{\item  Let $\mathcal{P}$ be a partition of $V$ :}
-			\visible<4->{\item $e_{\mathcal{H}}(\mathcal{P})$ is the number of hyperedges intersecting at least 2 elements of $\mathcal{P}$}
-			\visible<5->{\item $\mathcal{H}$ is $(k,k)$-partition-connected, if : \begin{itemize}
+			\visible<3->{\item  Let $\mathcal{P}$ be a partition of $V$ :}
+			\visible<3->{\item $e_{\mathcal{H}}(\mathcal{P})$ is the number of hyperedges intersecting at least 2 elements of $\mathcal{P}$}
+			\visible<4->{\item $\mathcal{H}$ is $(k,k)$-partition-connected, if : \begin{itemize}
 					\item $\forall\mathcal{P}, e_{\mathcal{H}}(\mathcal{P}) \geq k \times |\mathcal{P}| $
 			\end{itemize}}
 		\end{itemize}
-		\visible<6->{We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.}
+		\visible<5->{We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.}
 	\end{frame}
 	
 	\begin{frame}{Main result}
@@ -1383,7 +1383,7 @@
 	\begin{frame}{Conclusion}
 		\only<-3>{
 			\begin{alertblock}{Final words}
-				\begin{itemize}
+				\begin{itemize}[<+->]
 					\item Generalization to hypergraphs of a previous article (by \textbf{\textsf{Ito and al.}}).
 					\item Algorithmic Proof of Frank's characterisation of $(k, k)$-partition connected hypergraphs.
 					\item Extensions of \textsf{Theorem 7} (main result) : Starting without conditions on $\lambda(\vec{\mathcal{H}})$.
