@@ -79,7 +79,7 @@ E2 = [({"A"}, "B"),
      ({"F", "A"}, "B"), # magenta
      ]
 
-E = E2
+E = E1
 Tp = [["A", "B", "C", "D", "E", "F"]]
 Tm = [["A", "B", "C", "D", "E", "F"]]
 Dp = []
@@ -92,16 +92,26 @@ R = []
 def deg_out(X):
     count = 0
     for tail, head in E:
+        done = False
         for x in X:
-            if x in tail and head not in X: 
+            if done:
+                continue
+            if x in tail and head not in X and not done: 
                 count += 1
+                done = True
     return count
             
 def deg_in(X):
     count = 0
     for tail, head in E:
         if head in X:
-            count += 1
+            done = False
+            for x in head:
+                if done: 
+                    continue
+                if x not in X and not done:
+                    count += 1
+                    done = True
     return count
 
 def min_inclusion_wise(S):

@@ -26,16 +26,18 @@ Finding Admissible (s,t)-hyperpath in RnT-
 
 ====================
 next lines semi visibles or invisible. We should chose only one option
+
 proof of claims 1b -> what does that acomplish ? maybe we need to put it aside
+
 maybe give a sens of direction. Why are we proving a results ? Explain our goal
 
 Idea Write Sets definition on the board ?
 Idea justify the proofs to give an idea how proofs in this paper work (a lot of cases and complicated sets)
 stopping criterai kinda == 'T+ and T- have been emptied out'
 ====================
+
 Table of contents : pas assez detaillé / pas fini
 slide 3: make a box for side note ?
-slide 4: print the edge as set {A, B, C} {A, B, C, D} ? 
 slide 5: draw circle around X
 slide 7: draw circle around X
 slide 9: do we need to define lambda(H) ? Yes
@@ -47,10 +49,10 @@ an extention of 2 known def to hypergraphs:
 1. define k-hyperedge connectivity 
 2. k-hyperarc connectivity
 A new def for our main result:
-3. define (k,k)-partition connected
+3. define (k,k)-partition connected (nop, sous le tapis)
 
-slide 11: write A = r ?
-explicite the sets of vertices ? at least write T+, T-, D+, D- ... ?
+slide 11: write A = r sur la figure
+explicite the sets of vertices ? at least write T+, T-, D+, D- ... ? -> NON
 check for stopping criteria
 explicite R
 goto (2.) in 2 step, do not higlight two point on the same slide
@@ -76,5 +78,28 @@ slide 19: animation normal then with a / then same for b ?
 slide 20: not the same as side 12 but maybe it should ?
 point 3 M': *An* inclusion...
 What does Point 3 means ?
+
+==========
+20/11 au soir
+slide 4 :
+- juste les sommet 
+- puis une hyperedge ABC
+- puis EF
+- puis le reste 
+slide 12: 
+ point 3 reformuler plus vaguement/ haut niveau
+animation slide 14
+slide 12 à copier entre 14 et 15
+animation slide 17
+pas de preuve pour lemme 10 trop long
+slide 17 (et avant) lemma 13, nommer les points a et b comme la proof
+slide 17 a a1 a2 en rouge
+slide 18 T- tipo couleur + tipo la preuve pour a 2 est valable en replacant r par t 
+slide 19 devient une copie de la slide 17, avec animation pour "barrer" les resutats prouvés.
+
+
+IMPORT tcolorBox
+faire disparaite D+ et D-
+justifier les choix de demo par "c'est représentatif"
 
 
