@@ -102,7 +102,7 @@
 	\begin{frame}{State of the art, goal of the article}
 		\visible<1->{
 			\begin{tcolorbox}[colback=richcarmine!5!white,colframe=richcarmine!75!black,title=Nash-Williams (1960)]
-				$G$ is a $2k$-edge connected undirected graph $\Leftrightarrow$ it admits a $k$-arc connected orientation.
+				$G$ is a $2k$-edge connected undirected graph $\Leftrightarrow$ $G$ admits a $k$-arc connected orientation.
 			\end{tcolorbox}
 		}
 		
@@ -609,7 +609,7 @@
 						\coordinate (E) at (180:\radius);
 						\coordinate (F) at (120:\radius);
 						
-						\fill (A) circle (2pt); \visible<1>{\node[above right=2pt] at (A) {$A$};} \visible<2>{\node[above right=2pt] at (A) {$A = r$};} \visible<2>{\fill[alizarin] (A) circle (4pt);} \visible<5>{\fill[caribbeangreen] (A) circle (3 pt);} \visible<13-18>{\fill[atomictangerine] (A) circle (3 pt);}
+						\fill (A) circle (2pt); \visible<1>{\node[above right=2pt] at (A) {$A$};} \visible<2->{\node[above right=2pt] at (A) {$A = r$};} \visible<2>{\fill[alizarin] (A) circle (4pt);} \visible<5>{\fill[caribbeangreen] (A) circle (3 pt);} \visible<13-18>{\fill[atomictangerine] (A) circle (3 pt);}
 						\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
 						\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$}; \visible<5>{\fill[atomictangerine] (C) circle (3 pt);}
 						\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$}; \visible<9>{\fill[caribbeangreen] (D) circle (3 pt);}
@@ -782,7 +782,7 @@
 									
 					\end{tikzpicture}
 
-					\caption*{\only<2->{Minimal }In-\only<1->{Tight} sets}
+					\caption*{\only<3->{Minimal }In-\only<1->{Tight} sets}
 				\end{figure}
 			\end{column}
 			\hfill\vrule\hfill
@@ -805,7 +805,7 @@
 						\visible<-2>{\draw[thin] (0,0) circle (\mid);}
 						\visible<2,3>{\draw[thin, dashed] (0,0) circle (\smol);}				
 					\end{tikzpicture}
-					\caption*{\only<2->{Minimal }Out-\only<1->{Tight} sets}
+					\caption*{\only<3->{Minimal }Out-\only<1->{Tight} sets}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -1128,11 +1128,11 @@
 		\begin{block}{Proof of Lemma 13}
 			By contradiction, either :
 			\begin{itemize}
-				\item[\textbf<2>{\color<2>{alizarin}a.}] $s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
+				\item[\textbf<2>{\color<2>{alizarin}a.}] $\exists X\subseteq V - r, s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
 					\item[\textbf<2>{\color<2>{alizarin}a1.}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
 					\item[\textbf<2>{\color<2>{alizarin}a2.}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
 				\end{itemize}}
-				\item[b.] $s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
+				\item[b.] $\exists{X}\subseteq{V-r}, s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
 					\item[b1.] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
 					\item[b2.] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
 				\end{itemize}}
@@ -1294,7 +1294,7 @@
 		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 12(a)]
 			$\forall{s}\in V, \forall{t}\in Q^{s}_{+}$, there exists an $(s, t)$-hyperpath that does not leave $Q^{s}_{+}$.
 		\end{tcolorbox}
-		
+
 		\begin{block}{Proof of Lemma 12 (a)}
 			\begin{itemize}[<+->]
 				\item By contradiction, assume that there is $s\in{V}, t\in Q^{s}_{+}$ such that any $(s, t)$-hyperpath leaves $Q^{s}_{+}$.
