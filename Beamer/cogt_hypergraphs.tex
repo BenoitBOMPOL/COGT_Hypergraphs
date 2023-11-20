@@ -67,6 +67,7 @@
 \definecolor{battleshipgrey}{rgb}{0.52, 0.52, 0.51}
 \definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
 \definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+\definecolor{lightsalmon}{rgb}{1.0, 0.63, 0.48}
 
 \usetheme{EastLansing}
 
@@ -99,26 +100,27 @@
 	\section{Introduction}
 	\subsection{Connectivity problems, characterisations}
 	\begin{frame}{State of the art, goal of the article}
-		\begin{itemize}
-			\visible<2->{\item \textit{Nash-Williams}, 1960 :}
-			\visible<2->{\begin{itemize}
-					\item $G$ is $2k$-edge connected $\iff$ $G$ admits a $k$-arc-connected orientation.
-			\end{itemize}}
-			
-			\visible<3->{\item \textit{Ito and al.}, 2023 : }
-			\visible<3->{\begin{itemize}
+		\visible<1->{
+			\begin{tcolorbox}[colback=richcarmine!5!white,colframe=richcarmine!75!black,title=Nash-Williams (1960)]
+				$G$ is a $2k$-edge connected undirected graph $\Leftrightarrow$ it admits a $k$-arc connected orientation.
+			\end{tcolorbox}
+		}
+		
+		\visible<2->{
+			\begin{tcolorbox}[colback=richcarmine!5!white,colframe=richcarmine!75!black,title=Ito et al (2023)]
+				\begin{itemize}
 					\item Algorithmic proof of \textit{Nash-Williams}, by flipping one arc at a time.
 					\item Exhibiting a sequence of orientations such that :
-					\begin{itemize}
-						\item The arc-connectivity does not decrease, and the arc-connectivity of the last element of the sequence is $k$.
-						\item The next orientation in the sequence can be obtained from the previous one by flipping exactly one arc.
-						\item The sequence can be obtained in polynomial time (in the size of the directed graph).
-					\end{itemize}
-			\end{itemize}}
-		\end{itemize}
+						\begin{itemize}
+							\item The arc-connectivity does not decrease, and the arc-connectivity of the last element of the sequence is $k$.
+							\item The next orientation in the sequence can be obtained from the previous one by flipping exactly one arc.
+							\item The sequence can be obtained in polynomial time (in the size of the directed graph).
+						\end{itemize}	
+				\end{itemize}
+			\end{tcolorbox}
+		}
 		
-		\visible<4->{Goal of the article : Expanding the result of \textbf{Ito and al.} to hypergraphs.\\}
-		\visible<5->{Side note : This article generalise the results of \textbf{Ito and al.}, as directed graphs are special case of hypergraphs.}
+		\visible<3->{Goal of the article : Expanding the result of \textbf{Ito and al.} to hypergraphs, as directed graphs are special case of hypergraphs.}
 	\end{frame}
 	
 	\subsection{Hypergraphs}
@@ -141,13 +143,15 @@
 				\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$};
 				\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$};
 				
+				\visible<3>{
+					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=75, in=-135] (F);
+				}
 				
-				\visible<1->{
+				\visible<4->{
 					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (A) to [out=-45, in=105] (B);
 					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (B) to [out=-105, in=45] (C);
 					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (C) to [out=195, in=-15] (D);
 					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (D) to [out=135, in=-75] (E);
-					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (E) to [out=75, in=-135] (F);
 					\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 4pt] (F) to [out=15, in=165] (A);
 				}
 				
@@ -171,7 +175,7 @@
 					\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 4pt] (ab) to [out = 0, in = -30] (C);
 				}
 				
-				\visible<3->{
+				\visible<4->{
 					% {ABC -> D}
 					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
 					\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
@@ -219,7 +223,8 @@
 				\coordinate (E) at (180:\radius);
 				\coordinate (F) at (120:\radius);
 				
-				\node[above right=2pt] at (A) {$A$}; \fill (A) circle (2pt); \visible<2->{\fill[alizarin] (A) circle (4pt);}
+				\node[above right=2pt] at (A) {$A$}; \fill (A) circle (2pt);
+				\visible<2->{\draw[dashdotted, ultra thick] (A) circle (1); \node[above right=7mm] at (A) {$X=\{A\}$};}
 				\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
 				\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$};
 				\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$};
@@ -573,25 +578,17 @@
 		
 	\end{frame}
 	
-	\begin{frame}{Hyperarc-connectivity and $(k, k)$-partition connected hypergraphs}
-		\begin{itemize}
+	\begin{frame}{Hyperarc-connectivity}
+		\begin{itemize}[<+->]
 			\item $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}, if, $\forall\varnothing\not=X\subsetneq V$, $d^{+}_{\vec{\mathcal{H}}}(X) \geq k$.
 			\item The hyperarc-connectivity of a hypergraph, denoted $\lambda(\vec{\mathcal{H}})$, is the maximum value of $k$ such that $\vec{\mathcal{H}}$ is \textit{$k$-hyperarc-connected}.
-			\visible<2->{\item The previous orientation given was 2-hyperarc-connected.}
 		\end{itemize}
-		
-		\begin{itemize}
-			\visible<3->{\item  Let $\mathcal{P}$ be a partition of $V$ :}
-			\visible<3->{\item $e_{\mathcal{H}}(\mathcal{P})$ is the number of hyperedges intersecting at least 2 elements of $\mathcal{P}$}
-			\visible<4->{\item $\mathcal{H}$ is $(k,k)$-partition-connected, if : \begin{itemize}
-					\item $\forall\mathcal{P}, e_{\mathcal{H}}(\mathcal{P}) \geq k \times |\mathcal{P}| $
-			\end{itemize}}
-		\end{itemize}
-		\visible<5->{We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.}
 	\end{frame}
 	
 	\begin{frame}{Main result}
-		\begin{tcolorbox}[colback=bondiblue!5!white,colframe=bondiblue!75!black,title=Main result (Theorem 7)]
+		We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.
+
+		\begin{tcolorbox}[colback=richcarmine!5!white,colframe=richcarmine!75!black,title=Main result (Theorem 7)]
 			Let $\mathcal{H} = (V, E)$ be a $(k+1, k+1)$-partition-connected hypergraph and $\vec{\mathcal{H}}$ is a k-hyperarc connected orientation of $\mathcal{H}$. Then there exists a sequence of hypergraphs $(\vec{\mathcal{H}_{i}})_{i\in0\dots\ell}$ such that $\vec{\mathcal{H}}_{i+1}$ is obtained from $\vec{\mathcal{H}}_{i}$ by reorienting exactly one hyperarc and $\lambda(\vec{\mathcal{H}}_{i+1}) \geq \lambda(\vec{\mathcal{H}}_{i})$ and $\lambda(\vec{\mathcal{H}}_{\ell}) = k + 1$. Such a sequence of orientations can be obtained with $\ell \leq |V|^{3}$ and found in polynomial time (in the size of $\mathcal{H}$).
 		\end{tcolorbox}
 	\end{frame}
@@ -612,7 +609,7 @@
 						\coordinate (E) at (180:\radius);
 						\coordinate (F) at (120:\radius);
 						
-						\fill (A) circle (2pt); \node[above right=2pt] at (A) {$A$}; \visible<2>{\fill[alizarin] (A) circle (4pt);} \visible<5>{\fill[caribbeangreen] (A) circle (3 pt);} \visible<13-18>{\fill[atomictangerine] (A) circle (3 pt);}
+						\fill (A) circle (2pt); \visible<1>{\node[above right=2pt] at (A) {$A$};} \visible<2>{\node[above right=2pt] at (A) {$A = r$};} \visible<2>{\fill[alizarin] (A) circle (4pt);} \visible<5>{\fill[caribbeangreen] (A) circle (3 pt);} \visible<13-18>{\fill[atomictangerine] (A) circle (3 pt);}
 						\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
 						\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$}; \visible<5>{\fill[atomictangerine] (C) circle (3 pt);}
 						\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$}; \visible<9>{\fill[caribbeangreen] (D) circle (3 pt);}
@@ -738,7 +735,7 @@
 					\item <alert@3,7,11,19> Compute sets of vertices.
 					\item <alert@20> Stopping Criteria
 					\item <alert@4,8,12> Select a set $R$ (cf. 2.)
-					\item <alert@5,9,13> \textbf<21>{Find an admissible $(s, t)$-hyperpath in $R$ to reorient}
+					\item <alert@5,9,13> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
 					\item <alert@6,10,14-18> Reorient the corresponding hyperpath.
 					\item <alert@7,11,19> \texttt{Goto} (2.)
 				\end{enumerate}
@@ -747,13 +744,12 @@
 	\end{frame}
 
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
-		\begin{itemize}
-			\item<1-> Crucial segment of the algorithm.
-			\item<2-> Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
+		\begin{itemize}[<+->]
+			\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
 			\begin{enumerate}
-				\item<3-> $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
-				\item<4-> Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
-				\item<5-> After reorientation of $P$, there is a set whose cardinality is a guarantee that the algorithm will stop.
+				\item $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
+				\item Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
+				\item \textit{Stopping Criteria}-related argument
 			\end{enumerate}
 		\end{itemize}
 
@@ -762,7 +758,7 @@
 		\end{flushright}
 	\end{frame}
 
-	\begin{frame}{Tight and Dangerous sets}
+	\begin{frame}{Tight and Minimal-tight sets}
 		\begin{columns}
 			\begin{column}{0.45\textwidth}
 				\begin{figure}[H]
@@ -775,22 +771,18 @@
 						\coordinate (u) at (120:\radius);
 						\coordinate (U) at (120:\Radius);
 
-						\coordinate (v) at (90:\radius);
-						\coordinate (V) at (90:\Radius);
-
 						\coordinate (w) at (60:\radius);
 						\coordinate (W) at (60:\Radius);
 					
 						\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
-						\visible<2>{\draw[ultra thick, ->, caribbeangreen] (V) to [out=-90, in=90] (v);}
 						\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
 						
-						\visible<-4>{\draw[thin] (0,0) circle (\mid);}
-						\visible<4->{\draw[thin, dashed] (0,0) circle (\smol);}
+						\visible<-2>{\draw[thin] (0,0) circle (\mid);}
+						\visible<2,3>{\draw[thin, dashed] (0,0) circle (\smol);}
 									
 					\end{tikzpicture}
 
-					\caption*{\only<4->{Minimal }In-\only<1,3->{Tight}\only<2>{Dangerous} sets}
+					\caption*{\only<2->{Minimal }In-\only<1->{Tight} sets}
 				\end{figure}
 			\end{column}
 			\hfill\vrule\hfill
@@ -804,57 +796,48 @@
 
 						\coordinate (u) at (120:\radius);
 						\coordinate (U) at (120:\Radius);
-
-						\coordinate (v) at (90:\radius);
-						\coordinate (V) at (90:\Radius);
-
 						\coordinate (w) at (60:\radius);
 						\coordinate (W) at (60:\Radius);
 					
 						\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
-						\visible<2>{\draw[ultra thick, <-, atomictangerine] (V) to [out=-90, in=90] (v);}
 						\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
 						
-						\visible<-4>{\draw[thin] (0,0) circle (\mid);}
-						\visible<4->{\draw[thin, dashed] (0,0) circle (\smol);}				
+						\visible<-2>{\draw[thin] (0,0) circle (\mid);}
+						\visible<2,3>{\draw[thin, dashed] (0,0) circle (\smol);}				
 					\end{tikzpicture}
-					\caption*{\only<4->{Minimal }Out-\only<1,3->{Tight}\only<2>{Dangerous} sets}
+					\caption*{\only<2->{Minimal }Out-\only<1->{Tight} sets}
 				\end{figure}
 			\end{column}
 		\end{columns}
 
 		\only<1->{
 			\begin{itemize}
-				\item<1,3> ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
-				\item<1,3> ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
-				\item<2> ${\color{caribbeangreen}\mathcal{D}_{-}} = \{X \subseteq V - r, d^{-}(X) = k + 1\}$ 
-				\item<2> ${\color{atomictangerine}\mathcal{D}_{+}} = \{X \subseteq V - r, d^{+}(X) = k + 1\}$
-				\item<4-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
-				\item<4-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
-				\item<4-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
+				\item<1-> ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
+				\item<1-> ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
+				\item<3-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
+				\item<3-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
+				\item<3-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
 			\end{itemize}
 		}
 
 	\end{frame}
 
 	\begin{frame}{Crossing sets and structural results}
-		Let $X, Y$ two crossing sets in $V$.
-		\begin{block}{Claim 1(b)}
-			If $X, Y\in{\color{atomictangerine}\mathcal{T}_{+}}$, then both $X\cup{Y}\in{\color{atomictangerine}\mathcal{T}_{+}}$ and $X\cap{Y}\in{\color{atomictangerine}\mathcal{T}_{+}}$.
+		\begin{tcolorbox}[colback=bondiblue!5!white,colframe=bondiblue!75!black,title=Claim 1(b)]	
+		Let $X, Y$ two crossing sets in $V$.\\
+		If $X, Y\in{\color{atomictangerine}\mathcal{T}_{+}}$, then both $X\cup{Y}\in{\color{atomictangerine}\mathcal{T}_{+}}$ and $X\cap{Y}\in{\color{atomictangerine}\mathcal{T}_{+}}$.
+		\end{tcolorbox}
+
+		\begin{block}{Proof of Claim 1(b)}
+			\begin{itemize}[<+->]
+				\item Since $X, Y$ are crossing, $X\cap{Y}\not=\varnothing$, $X\cup{Y}\not=V$.
+				\item $k + k = d^{+}(X) + d^{+}(Y)$
+				\item By submodularity, $d^{+}(X) + d^{+}(Y) \geq d^{+}(X\cup{Y}) + d^{+}(X\cap{Y})$
+				\item As $\lambda(\vec{\mathcal{H}}) = k$, we have $d^{+}(X\cup{Y}) \geq k$ and $d^{+}(X\cap{Y}) \geq k$
+				\item Grouping these equations, we obtain : $k + k = d^{+}(X) + d^{+}(Y) \geq d^{+}(X\cup{Y}) + d^{+}(X\cap{Y}) \geq k + k$.
+				\item This implies $d^{+}(X\cup Y) = k = d^{+}(X\cap Y)$, i.e. $X\cap Y, X\cup Y \in {\color{atomictangerine}\mathcal{T}_{+}}$
+			\end{itemize}
 		\end{block}
-		\only<2->{
-			\begin{block}{Proof of Claim 1(b)}
-				\begin{itemize}[<+->]
-					\item We have $\lambda(\vec{\mathcal{H}}) = k$
-					\item Since $X, Y$ are crossing, $X\cap{Y}\not=\varnothing$, $X\cup{Y}\not=V$.
-					\item $k + k = d^{+}(X) + d^{+}(Y)$
-					\item By submodularity, $d^{+}(X) + d^{+}(Y) \geq d^{+}(X\cup{Y}) + d^{+}(X\cap{Y})$
-					\item By $\lambda(\vec{\mathcal{H}}) = k$, $d^{+}(X\cup{Y}) \geq k$ and $d^{+}(X\cap{Y}) \geq k$
-					\item Grouping these equations, we obtain : $k + k = d^{+}(X) + d^{+}(Y) \geq d^{+}(X\cup{Y}) + d^{+}(X\cap{Y}) \geq k + k$.
-					\item This implies $d^{+}(X\cup Y) = k$, $d^{+}(X\cap Y)$, i.e. $X\cap Y, X\cup Y \in {\color{atomictangerine}\mathcal{T}_{+}}$
-				\end{itemize}
-			\end{block}
-		}
 	\end{frame}
 
 	\mode<handout>{
@@ -1002,20 +985,31 @@
 		\end{frame}
 	}
 
-	\begin{frame}{Existence of a safe source (\textit{a safe sink})}
-		\begin{block}{Lemma 10}$\forall{S}\in{\color{caribbeangreen}\mathcal{M}_{-}}, \text{ there is a safe source }s\in{S}.$\end{block}
-		Likewise,
-		\begin{block}{Lemma 11}$\forall{T}\in{\color{atomictangerine}\mathcal{M}_{+}}, \text{ there is a safe sink }t\in{T}.$\end{block}
+	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
+		Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
+		\begin{itemize}
+			\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
+			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
+			\item[3.] Let $\vec{\mathcal{H}'}$ the hypergraph obtained after reorientation of $P$.
+		\end{itemize}
+		
+		Point {\color{majorelleblue}3.} is the stopping criteria for the main algorithm :
+		\begin{itemize}
+			\item $\mathcal{M} = \{V\}$ implies both ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
+			\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
+			\item ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
+			\item Finally, if $\lambda(\vec{\mathcal{H}}) \geq k$ and ${\color{caribbeangreen}\mathcal{T}_{-}} = {\color{atomictangerine}\mathcal{T}_{+}} = \{V\}$, $\vec{\mathcal{H}}$ is $(k+1)$-hyperarc-connected.
+		\end{itemize}
+	\end{frame}
 
-		\begin{block}
-			{Quick outline of a proof for \textsf{Lemma 10} :}
-			\begin{itemize}
-				\item Let $S\in\mathcal{M}_{-}$.
-				\item Considering a family of vertex sets ($\chi$) that cover as many vertices of $S$ as possible, but using as little as vertex sets possible.
-				\item We can prove that, under given assumptions, $\chi$ cannot cover every vertex of $S$.
-				\item Vertices that are not covered by $\chi$ are "potential" safe sources, the last part of the proof is verifying that they are effectively safe sources.
-			\end{itemize}
-		\end{block}
+	\begin{frame}{Existence of a safe source (\textit{a safe sink})}
+		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 10]
+			$\forall{S}\in{\color{caribbeangreen}\mathcal{M}_{-}}, \text{ there is a safe source }s\in{S}.$
+		\end{tcolorbox}
+
+		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 11]
+			$\forall{T}\in{\color{atomictangerine}\mathcal{M}_{+}}, \text{ there is a safe sink }t\in{T}.$
+		\end{tcolorbox}
 	\end{frame}
 
 	\begin{frame}{Towards hyperarc connectivity augmentation}
@@ -1025,13 +1019,13 @@
 			\item or $R\in{\color{atomictangerine}\mathcal{T}_{+}}$, and contains a member of ${\color{caribbeangreen}\mathcal{T}_{-}}$.
 		\end{itemize}
 
-		\begin{block}{Lemma 13}
+		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 13]
 			Let $R\in\mathcal{R}, S\in{\color{caribbeangreen}\mathcal{M}_{-}}, T\in{\color{atomictangerine}\mathcal{M}_{+}}$ such that $S,T\subseteq{R}$. Let $s$ be a safe source in $S$, $t$ a safe sink in $T$.
 			\begin{itemize}
 				\item[a.] $\forall{X}\subseteq V-r$ such that $s\in X$, $t\not\in X$, we have $d^{+}(X) \geq k + 1$.
 				\item[b.] $\forall{X}\subseteq V-r$ such that $s\not\in X$, $t\in X$, we have $d^{-}(X) \geq k + 1$.
 			\end{itemize}
-		\end{block}
+		\end{tcolorbox}
 
 		\begin{columns}
 			\begin{column}{0.45\textwidth}
@@ -1123,29 +1117,27 @@
 	\end{frame}
 
 	\begin{frame}{Towards hyperarc connectivity augmentation}
-		\begin{block}{Lemma 13}
-			Let $R\in\mathcal{R}, S\in{\color{caribbeangreen}\mathcal{M}_{-}}, T\in{\color{atomictangerine}\mathcal{M}_{+}}$ such that $S,T\subseteq{R}$. Let $s$ be a safe source in $S$, $t$ a safe sink in $T$.\\
-			Then :
+		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 13]
+			Let $R\in\mathcal{R}, S\in{\color{caribbeangreen}\mathcal{M}_{-}}, T\in{\color{atomictangerine}\mathcal{M}_{+}}$ such that $S,T\subseteq{R}$. Let $s$ be a safe source in $S$, $t$ a safe sink in $T$.
 			\begin{itemize}
-				\item $\forall{X}\subseteq V-r$ such that $s\in X$, $t\not\in X$, we have $d^{+}(X) \geq k + 1$.
-				\item $\forall{X}\subseteq V-r$ such that $s\not\in X$, $t\in X$, we have $d^{-}(X) \geq k + 1$.
+				\item[a.] $\forall{X}\subseteq V-r$ such that $s\in X$, $t\not\in X$, we have $d^{+}(X) \geq k + 1$.
+				\item[b.] $\forall{X}\subseteq V-r$ such that $s\not\in X$, $t\in X$, we have $d^{-}(X) \geq k + 1$.
+			\end{itemize}
+		\end{tcolorbox}
+		
+		\begin{block}{Proof of Lemma 13}
+			By contradiction, either :
+			\begin{itemize}
+				\item[\textbf<2>{\color<2>{alizarin}a.}] $s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
+					\item[\textbf<2>{\color<2>{alizarin}a1.}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
+					\item[\textbf<2>{\color<2>{alizarin}a2.}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
+				\end{itemize}}
+				\item[b.] $s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
+					\item[b1.] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
+					\item[b2.] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
+				\end{itemize}}
 			\end{itemize}
 		\end{block}
-		\only<2->{
-			\begin{block}{Proof of Lemma 13}
-				By contradiction, either :
-				\begin{itemize}
-					\item[\textbf<3>{a.}] $s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
-						\item[\textbf<3>{a1.}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
-						\item[\textbf<3>{a2.}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
-					\end{itemize}}
-					\item[b.] $s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
-						\item[b1.] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
-						\item[b2.] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
-					\end{itemize}}
-				\end{itemize}
-			\end{block}
-		}
 	\end{frame}
 
 	\begin{frame}{Proof of Lemma 13}
@@ -1212,25 +1204,30 @@
 			${\color{majorelleblue}a2.} : R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}, \exists X\subseteq V-r, s\in{X}, t\not\in{X}, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.
 			\begin{itemize}
 				\item[.] $R\in{\color{atomictangerine}\mathcal{T}_{+}}, X\in{\color{atomictangerine}\mathcal{T}_{+}}$, and $X\cap{R}\not=\varnothing \implies X\cap{R}\in{\color{atomictangerine}\mathcal{T}_{+}}$
-				\item[.] $S\in{\color{atomictangerine}\mathcal{T}_{-}}, S\subseteq R\cap{X}$. Since $r\in R\setminus X, X\cap R\subsetneq R$.
+				\item[.] $S\in{\color{atomictangerine}\mathcal{T}_{-}}, S\subseteq R\cap{X}$. Since $t\in R\setminus X, X\cap R\subsetneq R$.
 				\item[.] This contradicts the minimality of $R$.
 			\end{itemize}
 		}
-
 	\end{frame}
 
 	\begin{frame}{Proof of Lemma 13}
-
-		\begin{block}{Proof of Lemma 13}
-			By contradiction, either :
+		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 13]
+			Let $R\in\mathcal{R}, S\in{\color{caribbeangreen}\mathcal{M}_{-}}, T\in{\color{atomictangerine}\mathcal{M}_{+}}$ such that $S,T\subseteq{R}$. Let $s$ be a safe source in $S$, $t$ a safe sink in $T$.
 			\begin{itemize}
-				\item[\cancel{a}] $s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
-					\item[\cancel{a1.}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
-					\item[\cancel{a2.}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
+				\item[\textbf{\color{alizarin}a.}] $\forall{X}\subseteq V-r$ such that $s\in X$, $t\not\in X$, we have $d^{+}(X) \geq k + 1$.
+				\item[\textbf<2>{\color<2>{richcarmine}b.}] $\forall{X}\subseteq V-r$ such that $s\not\in X$, $t\in X$, we have $d^{-}(X) \geq k + 1$.
+			\end{itemize}
+		\end{tcolorbox}
+		
+		\begin{block}{Proof of Lemma 13}
+			\begin{itemize}
+				\item[\textbf{\color{alizarin}a.}] $s\in X, t\not\in X, d^{+}(X) = k$, i.e. $s\in X, t\not\in X, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.{\begin{itemize}
+					\item[\textbf{\color{alizarin}a1.}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
+					\item[\textbf{\color{alizarin}a2.}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
 				\end{itemize}}
-				\item[b.] $s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
-					\item[b1.] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
-					\item[b2.] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
+				\item[\textbf<2>{\color<2>{richcarmine}b.}] $s\not\in X, t\in X, d^{-}(X) = k$, i.e. $s\not\in X, t\in X, X\in{\color{caribbeangreen}\mathcal{T}_{-}}$.{\begin{itemize}
+					\item[\textbf<2>{\color<2>{richcarmine}b1.}] $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$
+					\item[\textbf<2>{\color<2>{richcarmine}b2.}] $R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}$ 
 				\end{itemize}}
 			\end{itemize}
 		\end{block}
@@ -1239,20 +1236,9 @@
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
 		Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
 		\begin{itemize}
-			\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
-			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
-			\item[3.] Let $\vec{\mathcal{H}'}$ the hypergraph obtained after reorientation of $P$.\begin{itemize}
-				\item $\mathcal{M}'$ : Inclusion-wise minimal members of $\mathcal{M}'_{-}\cup\mathcal{M}'_{+}$
-				\item Either $|\mathcal{M}'| < |\mathcal{M}|$, either $|\mathcal{M}'| = |\mathcal{M}|$ and $\mathcal{M}'$ covers more vertices than $\mathcal{M}$.
-			\end{itemize}
-		\end{itemize}
-		\ \newline
-		Point {\color{majorelleblue}3.} is the stopping criteria for the main algorithm :
-		\begin{itemize}
-			\item $\mathcal{M} = \{V\}$ implies both ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
-			\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
-			\item ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
-			\item Finally, if $\lambda(\vec{\mathcal{H}}) \geq k$ and ${\color{caribbeangreen}\mathcal{T}_{-}} = {\color{atomictangerine}\mathcal{T}_{+}} = \{V\}$, $\vec{\mathcal{H}}$ is $(k+1)$-hyperarc-connected.
+			\item[1.] $s$ is a \textbf{safe source} in $S\subseteq{R}$, $t$ is a \textbf{safe sink} in $T\subseteq{R}$.
+			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity{\begin{itemize}\item How to proceed ?\end{itemize}}
+			\item[3.] \textit{Stopping criteria}-related argument.
 		\end{itemize}
 	\end{frame}
 
@@ -1277,7 +1263,6 @@
 					\fill (X) circle (2pt);
 					\node[right = 2pt] at (X) {$u$};
 				}
-				
 
 				\coordinate (Y) at (0, 1);
 				\node[left = 5mm] at (Y) {$\color{richcarmine} Q^{v+}_{2}$};
@@ -1306,10 +1291,10 @@
 	\end{frame}
 
 	\begin{frame}{Existence of an hyperpath that does not leave $Q^{v}_{+}$}
-		\begin{block}{Lemma 12 (a)}
+		\begin{tcolorbox}[colback=lightsalmon!5!white,colframe=lightsalmon!75!black,title=Lemma 12(a)]
 			$\forall{s}\in V, \forall{t}\in Q^{s}_{+}$, there exists an $(s, t)$-hyperpath that does not leave $Q^{s}_{+}$.
-		\end{block}
-
+		\end{tcolorbox}
+		
 		\begin{block}{Proof of Lemma 12 (a)}
 			\begin{itemize}[<+->]
 				\item By contradiction, assume that there is $s\in{V}, t\in Q^{s}_{+}$ such that any $(s, t)$-hyperpath leaves $Q^{s}_{+}$.
