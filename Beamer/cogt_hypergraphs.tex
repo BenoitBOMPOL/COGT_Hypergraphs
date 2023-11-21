@@ -990,10 +990,9 @@
 		\begin{itemize}
 			\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
 			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
-			\item[3.] Let $\vec{\mathcal{H}'}$ the hypergraph obtained after reorientation of $P$.
+			\item[3.] Stopping criteria for the main algorithm :
 		\end{itemize}
 		
-		Point {\color{majorelleblue}3.} is the stopping criteria for the main algorithm :
 		\begin{itemize}
 			\item $\mathcal{M} = \{V\}$ implies both ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
 			\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
@@ -1204,7 +1203,7 @@
 			${\color{majorelleblue}a2.} : R\in\mathcal{R}\cap{\color{atomictangerine}\mathcal{T}_{+}}, \exists X\subseteq V-r, s\in{X}, t\not\in{X}, X\in{\color{atomictangerine}\mathcal{T}_{+}}$.
 			\begin{itemize}
 				\item[.] $R\in{\color{atomictangerine}\mathcal{T}_{+}}, X\in{\color{atomictangerine}\mathcal{T}_{+}}$, and $X\cap{R}\not=\varnothing \implies X\cap{R}\in{\color{atomictangerine}\mathcal{T}_{+}}$
-				\item[.] $S\in{\color{atomictangerine}\mathcal{T}_{-}}, S\subseteq R\cap{X}$. Since $t\in R\setminus X, X\cap R\subsetneq R$.
+				\item[.] $S\in{\color{caribbeangreen}\mathcal{T}_{-}}, S\subseteq R\cap{X}$. Since $t\in R\setminus X, X\cap R\subsetneq R$.
 				\item[.] This contradicts the minimality of $R$.
 			\end{itemize}
 		}
@@ -1313,7 +1312,7 @@
 	\begin{frame}[fragile]{Finding an admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
 		\only<-7>{
 			\begin{itemize}[<+->]
-				\item[1.] Only input of the algorithm $R\in\mathcal{R}\in{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
+				\item[1.] Only input of the algorithm $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
 					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
 				\end{itemize}}
 

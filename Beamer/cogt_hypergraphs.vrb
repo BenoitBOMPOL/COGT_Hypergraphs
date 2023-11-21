@@ -1,7 +1,7 @@
 \frametitle{Finding an admissible $(s, t)$-hyperpath in $R\in \mathcal {R}\cap {\color {caribbeangreen}\mathcal {T}_{-}}$}
 \only<-7>{
 			\begin{itemize}[<+->]
-				\item[1.] Only input of the algorithm $R\in\mathcal{R}\in{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
+				\item[1.] Only input of the algorithm $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
 					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
 				\end{itemize}}
 
