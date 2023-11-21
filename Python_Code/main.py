@@ -17,6 +17,9 @@ def main_algorithm(H : HyperGraph, r : int):
     
     if risky_set in H.in_tight(r):          # Step 5, 6 : Finding and reorienting P
         s, t, safe_source, safe_sink, hyperpath = H.alg2(risky_set, r)
+        print(f"\tsafe_source : {chr(safe_source + 64)}")
+        print(f"\tsafe_sink : {chr(safe_sink + 64)}\n")
+        
         l = len(hyperpath)
         for i in range(l - 1, 0, -1):
             head_to_reorient = hyperpath[i - 1].head
@@ -31,9 +34,10 @@ def main_algorithm(H : HyperGraph, r : int):
                 print(f"\tReorient {h} towards {chr(64 + safe_source)}")
                 h.reorient(safe_source)
                 print(f"\t\t After reorientation, H is {H.get_k()}-hyperarc-connected.")
-
     elif risky_set in H.out_tight(r):
         s, t, safe_source, safe_sink, hyperpath = H.alg3(risky_set, r)
+        print(f"\tsafe_source : {chr(safe_source + 64)}")
+        print(f"\tsafe_sink : {chr(safe_sink + 64)}\n")
         for h in H.hyperarcs:
             if h == hyperpath[0]:
                 print(f"\tReorient {h} towards {chr(64 + safe_source)}")
@@ -47,7 +51,7 @@ def main_algorithm(H : HyperGraph, r : int):
                     print(f"\tReorient {h} towards {chr(64 + head_to_reorient)}")
                     h.reorient(head_to_reorient)
                     print(f"\t\t After reorientation, H is {H.get_k()}-hyperarc-connected.")
-    
+    print()
     return True
 
 
@@ -59,7 +63,10 @@ if __name__ == "__main__":
     HYPERARCS = [HyperArc(tails, head) for (tails, head) in zip(TAILS_SET, HEADS_SET)]
     
     H = HyperGraph(VERTICES, HYPERARCS)
-    
+    print("+++ Hyperarcs +++")
+    for h in H.hyperarcs:
+        print(h)
+    print("--- Hyperarcs ---")
     print(f"H is {H.k}-hyperarc-connected.")
 
     r = 1

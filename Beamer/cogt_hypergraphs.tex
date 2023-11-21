@@ -609,95 +609,75 @@
 						\coordinate (E) at (180:\radius);
 						\coordinate (F) at (120:\radius);
 						
-						\fill (A) circle (2pt); \visible<1>{\node[above right=2pt] at (A) {$A$};} \visible<2->{\node[above right=2pt] at (A) {$A = r$};} \visible<2>{\fill[alizarin] (A) circle (4pt);} \visible<5>{\fill[caribbeangreen] (A) circle (3 pt);} \visible<13-18>{\fill[atomictangerine] (A) circle (3 pt);}
-						\fill (B) circle (2pt); \node[right=2pt] at (B) {$B$};
-						\fill (C) circle (2pt); \node[below=2pt] at (C) {$C$}; \visible<5>{\fill[atomictangerine] (C) circle (3 pt);}
-						\fill (D) circle (2pt); \node[below left=2pt] at (D) {$D$}; \visible<9>{\fill[caribbeangreen] (D) circle (3 pt);}
-						\fill (E) circle (2pt); \node[left=2pt] at (E) {$E$}; \visible<9>{\fill[atomictangerine] (E) circle (3 pt);}
-						\fill (F) circle (2pt); \node[above left=2pt] at (F) {$F$}; \visible<13-18>{\fill[caribbeangreen] (F) circle (3 pt);}
+						\fill (A) circle (2pt);
+							\visible<1>{\node[above right=2pt] at (A) {$A$};}
+							\visible<2->{\node[above right=2pt] at (A) {$A = r$};}
 						
-						\visible<-12>{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
-						}
+						\fill (B) circle (2pt);
+							\node[right=2pt] at (B) {$B$};
+
+						\fill (C) circle (2pt);
+							\node[below=2pt] at (C) {$C$};
+
+						\fill (D) circle (2pt);
+							\node[below left=2pt] at (D) {$D$};
 						
-						\visible<13-17>{
-							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
-						}
+						\fill (E) circle (2pt);
+							\node[left=2pt] at (E) {$E$};
+
+						\fill (F) circle (2pt);
+							\node[above left=2pt] at (F) {$F$};
 						
-						\visible<18->{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (A) to [out=-45, in=105] (B);
-						}
-						
-						\visible<-12>{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
-						}
-						\visible<13-16>{
-							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
-						}
-						\visible<17->{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (B) to [out=-105, in=45] (C);
-						}
-					
-						\visible<-12>{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
-						}
-						\visible<13-15>{
-							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
-						}
-						\visible<16->{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, <-] (C) to [out=195, in=-15] (D);
-						}
-					
-						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
-						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
 						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
 						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
-						
-						\visible<-4>{
-							% {AC -> B}
+						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);	
+						\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+
+						\visible<-11>{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+						}
+						\visible<12>{
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+						}
+						\visible<13->{
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
+						}
+
+						% {AC -> B}
+						\visible<-5>{
 							\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
 							\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
 						}
-						\visible<5>{
-							% {AC -> B}
-							\draw[dashed, ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
-							\draw[dashed, ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
+						\visible<6>{
+							\draw[dashdotted, ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 4pt] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+							\draw[dashdotted, ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 10pt, ->] (ac) to [out = 0, in = 180] (B);
 						}
-						\visible<6->{
-							% {AB -> C}
+						\visible<7->{
 							\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
 							\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
 						}
-						
-						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);
-						\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
-						
-						\visible<-8>{
-							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
+
+						% TODO : Highlight @ step 18, reorient step by step (19 -> 23)
+						\visible<-17>{
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
 						}
-						\visible<9>{
-							\draw[dashed, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=-45, in=105] (D);
-						}
-						\visible<10-12>{
-							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
-						}
-						\visible<13-14>{
-							\draw[dashed, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
-						}
-						\visible<15->{
-							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (E) to [out=-45, in=105] (D);
-						}
-						
-						\visible<-12>{
-							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
-						}
-						\visible<13>{
-							\draw[dashed, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
-						}
-						\visible<14->{
-							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, ->] (F) to [out=-105, in=45] (E);
-						}
-						
+						\visible<18-22>{\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);}
+						\visible<18-21>{\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);}
+						\visible<18-20>{\draw[dashdotted, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);}
+						\visible<18-19>{\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);}
+						\visible<18-18>{\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);}
+				
+						\visible<23->{\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (A) to [out=-45, in=105] (B);}
+						\visible<22->{\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (B) to [out=-105, in=45] (C);}
+						\visible<21->{\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=15, in=165] (C);}
+						\visible<20->{\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=135, in=-75] (E);}
+						\visible<19->{\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=75, in=-135] (F);}
+
 						% {AB -> C}
 						\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
 						\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
@@ -732,12 +712,12 @@
 			\begin{column}{0.5\textwidth}
 				\begin{enumerate}
 					\item <alert@2> Take $r$ in $V(\mathcal{H})$.
-					\item <alert@3,7,11,19> Compute sets of vertices.
-					\item <alert@20> Stopping Criteria
-					\item <alert@4,8,12> Select a set $R$ (cf. 2.)
-					\item <alert@5,9,13> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
-					\item <alert@6,10,14-18> Reorient the corresponding hyperpath.
-					\item <alert@7,11,19> \texttt{Goto} (2.)
+					\item <alert@3,9,15,25> Compute sets of vertices.
+					\item <alert@4,10,16,26> Stopping Criteria
+					\item <alert@5,11,17> Select a set $R$ (cf. 2.)
+					\item <alert@6,12,18> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
+					\item <alert@7,13,19-23> Reorient the corresponding hyperpath.
+					\item <alert@8,14,24> \texttt{Goto} (2.)
 				\end{enumerate}
 			\end{column}
 		\end{columns}	
