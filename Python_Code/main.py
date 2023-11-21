@@ -17,6 +17,7 @@ def main_algorithm(H : HyperGraph, r : int):
     
     if risky_set in H.in_tight(r):          # Step 5, 6 : Finding and reorienting P
         s, t, safe_source, safe_sink, hyperpath = H.alg2(risky_set, r)
+        print("+++ Algo 2 +++")
         print(f"\tsafe_source : {chr(safe_source + 64)}")
         print(f"\tsafe_sink : {chr(safe_sink + 64)}\n")
         
@@ -36,6 +37,7 @@ def main_algorithm(H : HyperGraph, r : int):
                 print(f"\t\t After reorientation, H is {H.get_k()}-hyperarc-connected.")
     elif risky_set in H.out_tight(r):
         s, t, safe_source, safe_sink, hyperpath = H.alg3(risky_set, r)
+        print("+++ Algo 3 +++")
         print(f"\tsafe_source : {chr(safe_source + 64)}")
         print(f"\tsafe_sink : {chr(safe_sink + 64)}\n")
         for h in H.hyperarcs:

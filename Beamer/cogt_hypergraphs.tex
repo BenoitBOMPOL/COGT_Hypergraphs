@@ -1,4 +1,4 @@
-\documentclass[10pt, aspectratio=43]{beamer}
+\documentclass[10pt, aspectratio=43,compress]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -68,6 +68,7 @@
 \definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
 \definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
 \definecolor{lightsalmon}{rgb}{1.0, 0.63, 0.48}
+\definecolor{darkseagreen}{rgb}{0.56, 0.74, 0.56}
 
 \usetheme{EastLansing}
 
@@ -80,7 +81,7 @@
 \newtheorem*{conj*}{Conjecture}
 \newtheorem*{lmm*}{Lemme}
 
-\setbeamercovered{transparent}
+% \setbeamercovered{transparent}
 \makeatother
 \author{Benoît \textsc{Bompol}, Armand \textsc{Grenier}}
 \subtitle{Combinatorial Optimization and Graph Theory}
@@ -585,6 +586,7 @@
 		\end{itemize}
 	\end{frame}
 	
+	\section{Main result, main algorithm}
 	\begin{frame}{Main result}
 		We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.
 
@@ -730,20 +732,24 @@
 	\end{frame}
 
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
-		\begin{itemize}[<+->]
-			\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
-			\begin{enumerate}
-				\item $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
-				\item Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
-				\item \textit{Stopping Criteria}-related argument
-			\end{enumerate}
-		\end{itemize}
+
+		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
+			\begin{itemize}[<+->]
+				\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
+				\begin{itemize}
+					\item[1.] $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
+					\item[2.] Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
+					\item[3.] \textit{Stopping Criteria}-related argument
+				\end{itemize}
+			\end{itemize}
+		\end{tcolorbox}
 
 		\begin{flushright}
 			\textit{A brief detour...}
 		\end{flushright}
 	\end{frame}
 
+	\section{Setting up the framework}
 	\begin{frame}{Tight and Minimal-tight sets}
 		\begin{columns}
 			\begin{column}{0.45\textwidth}
@@ -763,12 +769,12 @@
 						\draw[ultra thick, ->, caribbeangreen] (U) to [out=-60, in=120] (u);
 						\draw[ultra thick, ->, caribbeangreen] (W) to [out=-120, in=60] (w);
 						
-						\visible<-2>{\draw[thin] (0,0) circle (\mid);}
+						\visible<1,3>{\draw[thin] (0,0) circle (\mid);}
 						\visible<2,3>{\draw[thin, dashed] (0,0) circle (\smol);}
 									
 					\end{tikzpicture}
 
-					\caption*{\only<3->{Minimal }In-\only<1->{Tight} sets}
+					\caption*{\only<2>{Minimal }In-\only<1->{Tight} sets}
 				\end{figure}
 			\end{column}
 			\hfill\vrule\hfill
@@ -788,23 +794,21 @@
 						\draw[ultra thick, <-, atomictangerine] (U) to [out=-60, in=120] (u);
 						\draw[ultra thick, <-, atomictangerine] (W) to [out=-120, in=60] (w);
 						
-						\visible<-2>{\draw[thin] (0,0) circle (\mid);}
+						\visible<1,3>{\draw[thin] (0,0) circle (\mid);}
 						\visible<2,3>{\draw[thin, dashed] (0,0) circle (\smol);}				
 					\end{tikzpicture}
-					\caption*{\only<3->{Minimal }Out-\only<1->{Tight} sets}
+					\caption*{\only<2>{Minimal }Out-\only<1->{Tight} sets}
 				\end{figure}
 			\end{column}
 		\end{columns}
 
-		\only<1->{
-			\begin{itemize}
-				\item<1-> ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
-				\item<1-> ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
-				\item<3-> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
-				\item<3-> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
-				\item<3-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
-			\end{itemize}
-		}
+		\begin{itemize}[<+->]
+			\item<1,3> ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
+			\item<1,3> ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
+			\item<2,3> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
+			\item<2,3> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
+			\item<3-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
+		\end{itemize}
 
 	\end{frame}
 
@@ -971,13 +975,17 @@
 		\end{frame}
 	}
 
-	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
-		Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
-		\begin{itemize}
-			\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
-			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
-			\item[3.] Stopping criteria for the main algorithm :
-		\end{itemize}
+	\section{Advanced Framework}
+	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
+
+		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
+			Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
+			\begin{itemize}
+				\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
+				\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
+				\item[3.] Stopping criteria for the main algorithm :
+			\end{itemize}
+		\end{tcolorbox}
 		
 		\begin{itemize}
 			\item $\mathcal{M} = \{V\}$ implies both ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
@@ -997,6 +1005,7 @@
 		\end{tcolorbox}
 	\end{frame}
 
+	\section{Towards $(k+1)$-hyperarc connectivity}
 	\begin{frame}{Towards hyperarc connectivity augmentation}
 		$\mathcal{R}$ : $R\subseteq V - r$ inclusion-wise minimal such that either :
 		\begin{itemize}
@@ -1218,13 +1227,17 @@
 		\end{block}
 	\end{frame}
 
+	\section{Finding \textit{admissible} hyperpaths}
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
-		Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
-		\begin{itemize}
-			\item[1.] $s$ is a \textbf{safe source} in $S\subseteq{R}$, $t$ is a \textbf{safe sink} in $T\subseteq{R}$.
-			\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity{\begin{itemize}\item How to proceed ?\end{itemize}}
-			\item[3.] \textit{Stopping criteria}-related argument.
-		\end{itemize}
+
+		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
+			Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
+			\begin{itemize}
+				\item[1.] $s$ is a \textbf{safe source} in $S\subseteq{R}$, $t$ is a \textbf{safe sink} in $T\subseteq{R}$.
+				\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity{\begin{itemize}\item How to proceed ?\end{itemize}}
+				\item[3.] \textit{Stopping criteria}-related argument.
+			\end{itemize}
+		\end{tcolorbox}
 	\end{frame}
 
 	\begin{frame}{Introduction of $Q^{v}_{+}$}
@@ -1232,8 +1245,7 @@
 			Consider the sets of $\T_{+}$ containing $v$. $Q^{v}_{+}$ is \textbf{the} minimal (inclusion-wise) one.
 		\end{block}
 
-		\begin{block}{Unicity of $Q^{v}_{+}$ :}
-			If it exists, $Q^{v}_{+}$ is unique.
+		\begin{block}{Unicity of $Q^{v}_{+}$ :} $Q^{v}_{+}$ is unique.
 		\end{block}
 
 		\begin{figure}[H]
@@ -1296,21 +1308,103 @@
 	\end{frame}
 
 	\begin{frame}[fragile]{Finding an admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
-		\only<-7>{
-			\begin{itemize}[<+->]
-				\item[1.] Only input of the algorithm $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
-					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
-				\end{itemize}}
-
-				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$ such that $S\subseteq{R}$, then a safe source $s\in S$.
-				\item[3.] Main part of the algorithm : $s$-out arborescence{\begin{itemize}
-					\item $F$ : (Directed) arborescence, rooted in $s$
-					\item $Z$ : Explored (yet) vertices
-					\item $V'$ : Allowed remaining vertices to explore
-				\end{itemize}}
-			\end{itemize}
+		\only<1>{
+			\begin{columns}
+				\begin{column}{0.5\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{tikzpicture}
+							\def\radius{2}
+							\coordinate (A) at (60:\radius);
+							\coordinate (B) at (0:\radius);
+							\coordinate (C) at (300:\radius);
+							\coordinate (D) at (240:\radius);
+							\coordinate (E) at (180:\radius);
+							\coordinate (F) at (120:\radius);
+							
+							\fill (A) circle (2pt);
+								\node[above right=2pt] at (A) {$A = r$};
+								\fill[caribbeangreen] (A) circle (4pt);
+							
+							\fill (B) circle (2pt);
+								\node[right=2pt] at (B) {$B$};
+	
+							\fill (C) circle (2pt);
+								\node[below=2pt] at (C) {$C$};
+	
+							\fill (D) circle (2pt);
+								\node[below left=2pt] at (D) {$D$};
+							
+							\fill (E) circle (2pt);
+								\node[left=2pt] at (E) {$E$};
+	
+							\fill (F) circle (2pt);
+								\node[above left=2pt] at (F) {$F$};
+								\fill[atomictangerine] (F) circle (4pt);
+							
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);	
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+	
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
+	
+							% {AC -> B}
+							\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+							\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+	
+							% TODO : Highlight @ step 18, reorient step by step (19 -> 23)
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+							% {AB -> C}
+							\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+							\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+							
+							% {ABC -> D}
+							\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+							\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+							\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+							
+							% {CD -> E}
+							\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+							\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+							
+							% {CDE -> F}
+							\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+							\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+							
+							\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+							
+							% {EF -> A}
+							\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+							\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+							
+							% {FA -> B}
+							\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+							\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+							
+						\end{tikzpicture}
+					\end{figure}
+				\end{column}
+				\hfill
+				\begin{column}{0.5\textwidth}
+					\begin{enumerate}
+						\item Take $r$ in $V(\mathcal{H})$.
+						\item Compute sets of vertices.
+						\item Stopping Criteria
+						\item Select a set $R$ (cf. 2.)
+						\item <alert@1> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
+						\item Reorient the corresponding hyperpath.
+						\item \texttt{Goto} (2.)
+					\end{enumerate}
+				\end{column}
+			\end{columns}	
 		}
-		\only<8->{
+		\only<2->{
 			\begin{algorithm}[H]
 				\begin{algorithmic}[1]
 					\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
@@ -1335,17 +1429,15 @@
 		}
 	\end{frame}
 
+	\section{Conclusion}
 	\begin{frame}{A few words about complexity}
 		\begin{itemize}[<+->]
-			\item Computing $\mathcal{R}$, ${\color{caribbeangreen}\mathcal{M}_{-}}$, ${\color{atomictangerine}\mathcal{M}_{+}}$ in polynomial time :{\begin{itemize}
-				\item We can transform our hypergraph in a network (by trimming),
-				\item In which we can apply \textsf{\textbf{Edmonds-Karp}} to compute $(s, t)$-cuts.
-				\item It can be shown that $\mathcal{R}, \mathcal{M}_{-}, \mathcal{M}_{+}\in \mathcal{Q}$, with $\mathcal{Q}$ obtained while applying \textbf{\textsf{Edmonds-Karp}}.
+			\item We will need to transform our hypergraph as a network $(D, g)$.{\begin{itemize}
+				\item The size of the network is polynomial in $|V|$ and $|\mathcal{A}|$.
 			\end{itemize}}
-			\item Finding an \textit{admissible} hyperpath runs in polynomial time :{\begin{itemize}
-				\item Simple search that runs in polynomial time of number of hyperedges
-				\item Finding a safe source and safe sink in polynomial time thanks to \textbf{\textsf{Edmonds-Karp}}.
-			\end{itemize}}
+			\item Finding an \textit{admissible} hyperpath runs in polynomial time.
+			\item Computing $\mathcal{R}$, ${\color{caribbeangreen}\mathcal{M}_{-}}$, ${\color{atomictangerine}\mathcal{M}_{+}}$ in polynomial time.
+			\item The number of loops in the main algorithm is polynomial.
 			\item The main algorithm runs in polynomial time.
 		\end{itemize}
 	\end{frame}
@@ -1354,9 +1446,9 @@
 		\only<-3>{
 			\begin{alertblock}{Final words}
 				\begin{itemize}[<+->]
-					\item Generalization to hypergraphs of a previous article (by \textbf{\textsf{Ito and al.}}).
-					\item Algorithmic Proof of Frank's characterisation of $(k, k)$-partition connected hypergraphs.
-					\item Extensions of \textsf{Theorem 7} : Starting without conditions on $\lambda(\vec{\mathcal{H}})$.
+					\item Generalization of a previous article (by \textbf{\textsf{Ito and al.}}) to hypergraphs.
+					\item First efficient algorithm for computing a $k$-hyperarc-connected orientation of a hypergraph
+					\item Extensions of \textsf{Main Theorem} : Starting without conditions on $\lambda(\vec{\mathcal{H}})$.
 				\end{itemize}
 			\end{alertblock}
 		}

@@ -1,19 +1,101 @@
 \frametitle{Finding an admissible $(s, t)$-hyperpath in $R\in \mathcal {R}\cap {\color {caribbeangreen}\mathcal {T}_{-}}$}
-\only<-7>{
-			\begin{itemize}[<+->]
-				\item[1.] Only input of the algorithm $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}${\begin{itemize}
-					\item $s, t$ are constrained (maybe not unique) by the choice of $R$.
-				\end{itemize}}
-
-				\item[2.] Choosing $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$ such that $S\subseteq{R}$, then a safe source $s\in S$.
-				\item[3.] Main part of the algorithm : $s$-out arborescence{\begin{itemize}
-					\item $F$ : (Directed) arborescence, rooted in $s$
-					\item $Z$ : Explored (yet) vertices
-					\item $V'$ : Allowed remaining vertices to explore
-				\end{itemize}}
-			\end{itemize}
+\only<1>{
+			\begin{columns}
+				\begin{column}{0.5\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{tikzpicture}
+							\def\radius{2}
+							\coordinate (A) at (60:\radius);
+							\coordinate (B) at (0:\radius);
+							\coordinate (C) at (300:\radius);
+							\coordinate (D) at (240:\radius);
+							\coordinate (E) at (180:\radius);
+							\coordinate (F) at (120:\radius);
+							
+							\fill (A) circle (2pt);
+								\node[above right=2pt] at (A) {$A = r$};
+								\fill[caribbeangreen] (A) circle (4pt);
+							
+							\fill (B) circle (2pt);
+								\node[right=2pt] at (B) {$B$};
+	
+							\fill (C) circle (2pt);
+								\node[below=2pt] at (C) {$C$};
+	
+							\fill (D) circle (2pt);
+								\node[below left=2pt] at (D) {$D$};
+							
+							\fill (E) circle (2pt);
+								\node[left=2pt] at (E) {$E$};
+	
+							\fill (F) circle (2pt);
+								\node[above left=2pt] at (F) {$F$};
+								\fill[atomictangerine] (F) circle (4pt);
+							
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=195, in=-15] (F);
+							\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >=10pt, ->] (C) to [out=75, in=-135] (B);	
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (F) to [out=-105, in=45] (E);
+	
+							\draw[ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (E) to [out=-45, in=105] (D);
+	
+							% {AC -> B}
+							\draw[ultra thick, battleshipgrey, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-80, in=80] node[pos=0.5] (ac) {} (C);
+							\draw[ultra thick, battleshipgrey, shorten <= -4pt, shorten >= 4pt] (ac) to [out = 0, in = 180] (B);
+	
+							% TODO : Highlight @ step 18, reorient step by step (19 -> 23)
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (A) to [out=-45, in=105] (B);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (B) to [out=-105, in=45] (C);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 10pt, shorten >= 4pt, <-] (D) to [out=15, in=165] (C);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (D) to [out=135, in=-75] (E);
+							\draw[dashdotted, ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (E) to [out=75, in=-135] (F);
+							% {AB -> C}
+							\draw[ultra thick, darkturquoise, shorten <= 4pt, shorten >= 4pt] (A) to [out=0, in=60] node[pos=0.5] (ab) {} (B);
+							\draw[ultra thick, darkturquoise, shorten <= -4pt, shorten >= 10pt, ->] (ab) to [out = 0, in = -30] (C);
+							
+							% {ABC -> D}
+							\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= 4pt] (B) to [out=195, in=120] node[pos=0.5] (bc) {} (C);
+							\draw[ultra thick, richcarmine, shorten <= 4pt, shorten >= -4pt] (A) to [out=-120, in=120] (bc);
+							\draw[ultra thick, richcarmine, shorten <= -4pt, shorten >= 10pt, ->] (bc) to [out = 150, in = 45] (D);
+							
+							% {CD -> E}
+							\draw[ultra thick, majorelleblue, shorten <= 4pt, shorten >= 4pt] (C) to [out=240, in=-60] node[pos=0.5] (cd) {} (D);
+							\draw[ultra thick, majorelleblue, shorten <= -4pt, shorten >= 10pt, ->] (cd) to [out = -90, in = -120] (E);
+							
+							% {CDE -> F}
+							\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= 4pt] (D) to [out=60, in=0] node[pos=0.5] (de) {} (E);
+							\draw[ultra thick, darkpastelgreen, shorten <= 4pt, shorten >= -4pt] (C) to [out=120, in=0] (de);
+							
+							\draw[ultra thick, darkpastelgreen, shorten <= -4pt, shorten >= 10pt, ->] (de) to [out = 30, in = -75] (F);
+							
+							% {EF -> A}
+							\draw[ultra thick, darktangerine, shorten <= 4pt, shorten >= 4pt] (E) to [out=120,in=180] node[pos=0.5] (ef) {} (F);
+							\draw[ultra thick, darktangerine, shorten <= -4pt, shorten >= 10pt, ->] (ef) to [out = 120, in = 120] (A);
+							
+							% {FA -> B}
+							\draw[ultra thick, magenta, shorten <= 4pt, shorten >= 4pt] (F) to [out = -60, in = -120] node[pos=0.5] (fa) {} (A);
+							\draw[ultra thick, magenta, shorten <= -4pt, shorten >= 10pt, ->] (fa) to [out = -90, in = 150] (B);
+							
+						\end{tikzpicture}
+					\end{figure}
+				\end{column}
+				\hfill
+				\begin{column}{0.5\textwidth}
+					\begin{enumerate}
+						\item Take $r$ in $V(\mathcal{H})$.
+						\item Compute sets of vertices.
+						\item Stopping Criteria
+						\item Select a set $R$ (cf. 2.)
+						\item <alert@1> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
+						\item Reorient the corresponding hyperpath.
+						\item \texttt{Goto} (2.)
+					\end{enumerate}
+				\end{column}
+			\end{columns}	
 		}
-		\only<8->{
+		\only<2->{
 			\begin{algorithm}[H]
 				\begin{algorithmic}[1]
 					\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
