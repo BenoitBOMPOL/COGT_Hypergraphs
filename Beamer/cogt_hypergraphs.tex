@@ -85,7 +85,7 @@
 \makeatother
 \author{Benoît \textsc{Bompol}, Armand \textsc{Grenier}}
 \subtitle{Combinatorial Optimization and Graph Theory}
-\title[Directed hypergraph connectivity orientation]{\textsf{\textbf{Directed hypergraph connectivity augmentation by hyperarc re-orientations}}}
+\title[Directed hypergraph connectivity augmentation]{\textsf{\textbf{Directed hypergraph connectivity augmentation by hyperarc re-orientations}}}
 \date{Thursday, Nov 23rd 2023}
 
 \pgfplotsset{compat=1.18}
@@ -99,7 +99,6 @@
 	\end{frame}
 	
 	\section{Introduction}
-	\subsection{Connectivity problems, characterisations}
 	\begin{frame}{State of the art, goal of the article}
 		\visible<1->{
 			\begin{tcolorbox}[colback=richcarmine!5!white,colframe=richcarmine!75!black,title=Nash-Williams (1960)]
@@ -121,10 +120,9 @@
 			\end{tcolorbox}
 		}
 		
-		\visible<3->{Goal of the article : Expanding the result of \textbf{Ito and al.} to hypergraphs, as directed graphs are special case of hypergraphs.}
+		\visible<3->{Goal of the article : Expanding the result of \textbf{Ito and al.} to hypergraphs.}
 	\end{frame}
 	
-	\subsection{Hypergraphs}
 	\begin{frame}{Hypergraphs}    
 		\begin{figure}[H]
 			\centering
@@ -586,7 +584,7 @@
 		\end{itemize}
 	\end{frame}
 	
-	\section{Main result, main algorithm}
+	\section{Principal results}
 	\begin{frame}{Main result}
 		We use a result of Frank : $\mathcal{H}$ is $(k, k)$-partition-connected if and only if it admits a $k$-hyperarc-connected orientation.
 
@@ -737,9 +735,9 @@
 			\begin{itemize}[<+->]
 				\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
 				\begin{itemize}
-					\item[1.] $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
-					\item[2.] Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
-					\item[3.] \textit{Stopping Criteria}-related argument
+					\item[1.] \textit{Stopping Criteria}-related argument
+					\item[2.] $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
+					\item[3.] Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
 				\end{itemize}
 			\end{itemize}
 		\end{tcolorbox}
@@ -807,7 +805,6 @@
 			\item<1,3> ${\color{atomictangerine}\mathcal{T}_{+}} = \{X \subseteq V - r, d^{+}(X) = k\} \cup \{V\}$
 			\item<2,3> ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
 			\item<2,3> ${\color{atomictangerine}\mathcal{M}_{+}}$ : Inclusion-wise minimal members of ${\color{atomictangerine}\mathcal{T}_{+}}$
-			\item<3-> $\mathcal{M}$ : Inclusion-wise minimal members of $\mathcal{M}_{-}\cup\mathcal{M}_{+}$
 		\end{itemize}
 
 	\end{frame}
@@ -975,20 +972,19 @@
 		\end{frame}
 	}
 
-	\section{Advanced Framework}
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
 
 		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
 			Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
 			\begin{itemize}
-				\item[1.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
-				\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
-				\item[3.] Stopping criteria for the main algorithm :
+				\item[1.] Stopping criteria for the main algorithm :
+				\item[2.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
+				\item[3.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
 			\end{itemize}
 		\end{tcolorbox}
 		
 		\begin{itemize}
-			\item $\mathcal{M} = \{V\}$ implies both ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
+			\item Stopping criteria : ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
 			\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
 			\item ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
 			\item Finally, if $\lambda(\vec{\mathcal{H}}) \geq k$ and ${\color{caribbeangreen}\mathcal{T}_{-}} = {\color{atomictangerine}\mathcal{T}_{+}} = \{V\}$, $\vec{\mathcal{H}}$ is $(k+1)$-hyperarc-connected.
@@ -1029,6 +1025,9 @@
 						\def\radius{1}
 						\def\madius{1.5}
 						\def\Radius{2}
+
+						\coordinate (a) at (150:{3*\radius});
+						\node[below = 2pt] at (a) {{\color{majorelleblue}a.}};
 
 						\coordinate (s) at (0, 0);
 						\fill[caribbeangreen] (s) circle (2pt);
@@ -1072,6 +1071,9 @@
 						\def\radius{1}
 						\def\madius{1.5}
 						\def\Radius{2}
+
+						\coordinate (b) at (150:{3*\radius});
+						\node[below = 2pt] at (b) {{\color{majorelleblue}b.}};
 
 						\coordinate (s) at (-30:\Radius);
 						\fill[caribbeangreen] (s) circle (2pt);
@@ -1233,9 +1235,9 @@
 		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
 			Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
 			\begin{itemize}
-				\item[1.] $s$ is a \textbf{safe source} in $S\subseteq{R}$, $t$ is a \textbf{safe sink} in $T\subseteq{R}$.
-				\item[2.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity{\begin{itemize}\item How to proceed ?\end{itemize}}
-				\item[3.] \textit{Stopping criteria}-related argument.
+				\item[1.] \textit{Stopping criteria}-related argument.
+				\item[2.] $s$ is a \textbf{safe source} in $S\subseteq{R}$, $t$ is a \textbf{safe sink} in $T\subseteq{R}$.
+				\item[3.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity{\begin{itemize}\item How to proceed ?\end{itemize}}
 			\end{itemize}
 		\end{tcolorbox}
 	\end{frame}
@@ -1298,7 +1300,7 @@
 				\item There is $s\in Z\subseteq Q^{s}_{+}\setminus\{t\}$ such that any hyperarc leaving $Z$ will also leave $Q^{s}_{+}$.
 				\item We have the following inequalities{\begin{itemize}[<+->]
 					\item $d_{\vec{\mathcal{H}}}^{+}(Q^{s}_{+}) \geq d_{\vec{\mathcal{H}}}^{+}(Z)$
-					\item $d_{\vec{\mathcal{H}}}^{+}(Z) \geq k$, as $\mathcal{H}$ is $k$-hyperarc-connected.
+					\item $d_{\vec{\mathcal{H}}}^{+}(Z) \geq k$, as $\vec{\mathcal{H}}$ is $k$-hyperarc-connected.
 					\item $k = d_{\vec{\mathcal{H}}}^{+}(Q^{s}_{+})$ by definition.
 				\end{itemize}}
 				\item We can deduce that $d_{\vec{\mathcal{H}}}^{+}(Z) = k$, which automatically implies that $Z\in{\color{atomictangerine}\mathcal{T}_{+}}$.
