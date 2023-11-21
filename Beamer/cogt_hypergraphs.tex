@@ -612,21 +612,27 @@
 						\fill (A) circle (2pt);
 							\visible<1>{\node[above right=2pt] at (A) {$A$};}
 							\visible<2->{\node[above right=2pt] at (A) {$A = r$};}
+							\visible<18-23>{\fill[caribbeangreen] (A) circle (4pt);}
 						
 						\fill (B) circle (2pt);
 							\node[right=2pt] at (B) {$B$};
+							\visible<6>{\fill[atomictangerine] (B) circle (4pt);}
 
 						\fill (C) circle (2pt);
 							\node[below=2pt] at (C) {$C$};
+							\visible<6>{\fill[caribbeangreen] (C) circle (4pt);}
 
 						\fill (D) circle (2pt);
 							\node[below left=2pt] at (D) {$D$};
+							\visible<12>{\fill[atomictangerine] (D) circle (4pt);}
 						
 						\fill (E) circle (2pt);
 							\node[left=2pt] at (E) {$E$};
+							\visible<12>{\fill[caribbeangreen] (E) circle (4pt);}
 
 						\fill (F) circle (2pt);
 							\node[above left=2pt] at (F) {$F$};
+							\visible<18-23>{\fill[atomictangerine] (F) circle (4pt);}
 						
 						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (C) to [out=195, in=-15] (D);
 						\draw[ultra thick, antiquebrass, shorten <= 4pt, shorten >= 10pt, ->] (F) to [out=15, in=165] (A);
