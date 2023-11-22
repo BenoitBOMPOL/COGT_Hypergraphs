@@ -86,7 +86,7 @@
 					\begin{enumerate}
 						\item Take $r$ in $V(\mathcal{H})$.
 						\item Compute sets of vertices.
-						\item Stopping Criteria
+						\item Stopping Criterion
 						\item Select a set $R$ (cf. 2.)
 						\item <alert@1> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
 						\item Reorient the corresponding hyperpath.
@@ -96,25 +96,73 @@
 			\end{columns}	
 		}
 		\only<2->{
-			\begin{algorithm}[H]
-				\begin{algorithmic}[1]
-					\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
-					\State{Take a set $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, with $S\subseteq{R}$, then a safe source $s\in S$.}
-					\State{$Z = \{s\}$, $F = (Z, \varnothing)$, $V' = R$}
-					\While{$h = (X, v)$ exists such that $v\in V' - Z$ and $X\cap Z\not=\varnothing$}
-						\State Let $u\in X\cap{Z}$.
-						\State $Z \leftarrow Z\cup\{v\}$
-						\State $F \leftarrow F + uv$
-						\If{$Q^{v}_{+}\subsetneq V'$}
-							\State $V' \leftarrow Q^{v}_{+}$
-						\EndIf
-					\EndWhile
-					\State $T = V'$
-					\State Take a safe sink $t\in T$
-					\State $P' = F[s, t]$
-					\State $P$ is the corresponding hyperpath in $\vec{\mathcal{H}}$, obtained with $P'$.
-					\State \textbf{\textsf{Return}} $S, T, s, t, P$
-				\end{algorithmic}
-				\label{alg_1}
-			\end{algorithm}
+			\begin{itemize}[<+->]
+				\item Search $s$-out arborescence :{\begin{itemize}
+					\item $V'$ : Remaining allowed vertices to explore.
+					\item $Z$ : Already explored vertices.
+					\item $F$ : Arborescence rooted in $s$.
+				\end{itemize}}
+			\end{itemize}
+
+			\begin{figure}[H]
+				\begin{tikzpicture}
+					\def\radius{0.5}
+					\def\smol{1}
+					\def\mid{1.5}
+					\def\Radius{2.25}
+
+					\visible<5->{
+						\coordinate (O) at (0, 0);
+						\draw[thick] (O) circle (\Radius);
+						\coordinate (R) at (120:2.2);
+						\node[above left=2pt] at (R) {$R$};
+					}
+
+					\visible<6->{
+						\coordinate (s) at (210:\mid);
+						\fill[caribbeangreen] (s) circle (2pt);
+						\node[above=2pt] at (s) {$\color{caribbeangreen}s$};
+					}
+
+					\visible<7->{
+						\coordinate (v) at (210:\radius);
+						\fill (v) circle (2pt);
+						\node[below=2pt] at (v) {$v$};
+					}
+
+					\coordinate (A) at (0.5,0);
+					\visible<8->{
+						\draw[dashdotted] (A) circle (1.2);
+						\node at (0, 1.3) {$Q^{v}_{+}$};
+					}
+					
+					\visible<9->{
+						\coordinate (w) at (0.8, -0.3);
+						\fill (w) circle (2pt);
+						\node[right=2pt] at (w) {$w$};
+					}
+					\visible<10->{
+						\draw[dashdotted] (0.8, 0) circle (0.65);
+						\node at (0.6, 0.7) {$Q^{w}_{+}$};
+					}
+
+					\visible<7->{
+						\draw[thick, ->, shorten <= 3pt, shorten >= 3pt] (s) to (v);
+					}
+					\visible<9->{
+						\draw[thick, ->, shorten <= 3pt, shorten >= 3pt] (v) to (0.8, -0.3);
+					}
+
+					\visible<11->{
+						\coordinate (t) at (0.8, 0.3);
+						\fill[atomictangerine] (t) circle (2pt);
+						\draw[dashdotted] (0.8, 0) circle (0.65);
+						\node[left=2pt] at (t) {${\color{atomictangerine}t}$};
+					}
+
+					\visible<12->{
+						\draw[thick, ->, shorten <= 3pt, shorten >= 3pt] (w) to (t);
+					}
+				\end{tikzpicture}
+			\end{figure}
 		}

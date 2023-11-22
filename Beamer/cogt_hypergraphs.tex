@@ -70,13 +70,12 @@
 \definecolor{lightsalmon}{rgb}{1.0, 0.63, 0.48}
 \definecolor{darkseagreen}{rgb}{0.56, 0.74, 0.56}
 
-% \usetheme{Bergen}
 % \usetheme{Berlin}
-% \usetheme{classic}
 % \usetheme{Darmstadt}
 % \usetheme{Dresden}
 \usetheme{EastLansing}
 % \usetheme{Frankfurt}
+% \usetheme{Singapore}
 
 \setbeamertemplate{section in toc}[square]
 
@@ -725,7 +724,7 @@
 				\begin{enumerate}
 					\item <alert@2> Take $r$ in $V(\mathcal{H})$.
 					\item <alert@3,9,15,25> Compute sets of vertices.
-					\item <alert@4,10,16,26> Stopping Criteria
+					\item <alert@4,10,16,26> Stopping Criterion
 					\item <alert@5,11,17> Select a set $R$ (cf. 2.)
 					\item <alert@6,12,18> Find an admissible $({\color{caribbeangreen}s}, {\color{atomictangerine}t})$-hyperpath in $R$ to reorient
 					\item <alert@7,13,19-23> Reorient the corresponding hyperpath.
@@ -739,9 +738,9 @@
 
 		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
 			\begin{itemize}[<+->]
-				\item Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
+				\item Three criteria for $P$ to be an admissible $(s, t)$-hyperpath in $R$:
 				\begin{itemize}
-					\item[1.] \textit{Stopping Criteria}-related argument
+					\item[1.] \textit{Stopping Criterion}-related argument
 					\item[2.] $s$ is a {\color{alizarin}safe source} in $S\subseteq{R}$, $t$ is a {\color{alizarin}safe sink} in $T\subseteq{R}$.
 					\item[3.] Reorient each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity.
 				\end{itemize}
@@ -833,164 +832,21 @@
 		\end{block}
 	\end{frame}
 
-	\mode<handout>{
-		\begin{frame}{Safe Sources and Safe Sinks}
-			Definitions are symmetric (but proofs are not).
-			\only<1-2>{\begin{itemize}
-				\item For $S \in \mathcal{M}_{-}$, $s$ is a safe source in $S$ if :\begin{itemize}
-					\item[a]<1,2>{For every $s\in{X}\in\mathcal{T}_{+}$, we have $\color{red} S\subsetneq X$.}
-					\item[b]<2>{For every $s\in{X}\in\mathcal{D}_{+}$ such that $S\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{+}$ such that $s\not\in{Y}\subsetneq{X}$.}
-				\end{itemize}
-			\end{itemize}
-			\begin{columns}
-				\begin{column}{0.35\textwidth}
-					\only<1,2>{
-						\begin{figure}[H]
-							\begin{tikzpicture}
-								\def\smolrad{0.6}
-								\def\midrad{1.1}
-								\def\intrad{1.4}
-								\def\bigrad{1.7}
 
-								\coordinate (s) at (-60:\smolrad);
-								\fill (s) circle (2pt);
-								\node[above right=1pt] at (s) {$s$};
-
-								\coordinate (S) at (60:\midrad);
-								\node[above right] at (S) {$\color{caribbeangreen}S$};
-
-								\coordinate (X) at (120:\bigrad);
-								\node[above left] at (X) {$\color{atomictangerine}{X}$};
-
-								\coordinate (x) at (120:\intrad);
-								\fill[atomictangerine] (x) circle (2pt);
-
-								\draw[thick, caribbeangreen, dashed] (0,0) circle (\midrad);
-								\draw[ultra thick, atomictangerine] (0,0) circle (\bigrad);
-							\end{tikzpicture}
-							\caption*{Condition (a)}
-						\end{figure}
-					}
-				\end{column}
-				\hfill\vrule\hfill
-				\begin{column}{0.60\textwidth}
-					\only<2>{
-						\begin{figure}[H]
-							\begin{tikzpicture}
-								\def\ssmolrad{0.3}
-								\def\smolrad{0.6}
-								\def\midrad{1.1}
-								\def\intrad{1.4}
-								\def\bigrad{1.7}
-
-								\coordinate (s) at (0:\ssmolrad);
-								\fill (s) circle (2pt);
-								\node[above right=1pt] at (s) {$s$};
-
-								\coordinate (S) at (120:\intrad);
-								\node[above left] at (S) {$\color{caribbeangreen}S$};
-
-								\fill(120:\midrad) circle (2pt);
-
-								\node at (60:{1.2*\bigrad}) {$\color{atomictangerine}X$};
-								\node at (0:{1.3*\bigrad}) {$\color{atomictangerine}\mathbf{Y}$};
-								
-								\draw[thick, caribbeangreen, dashed] (0,0) circle (\intrad);
-
-								\coordinate (cE) at (0:\intrad);
-								\draw[very thick, atomictangerine, dashdotted] (cE) circle (\intrad);
-								\draw[ultra thick, atomictangerine] (cE) circle (\smolrad);
-							\end{tikzpicture}
-							\caption*{Condition (b)}
-						\end{figure}
-					}
-				\end{column}
-			\end{columns}
-			}
-			\only<3>{\begin{itemize}
-				\item For $T \in \mathcal{M}_{+}$, $t$ is a safe sink in $T$ if :\begin{itemize}
-					\item[c]{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}T\subsetneq X$.}
-					\item[d]{For every $t\in{X}\in\mathcal{D}_{-}$ such that $T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
-				\end{itemize}
-			\end{itemize}
-			\begin{columns}
-				\begin{column}{0.35\textwidth}
-					\begin{figure}[H]
-						\begin{tikzpicture}
-							\def\smolrad{0.6}
-							\def\midrad{1.1}
-							\def\intrad{1.4}
-							\def\bigrad{1.7}
-
-							\coordinate (t) at (-60:\smolrad);
-							\fill (t) circle (2pt);
-							\node[above right=1pt] at (t) {$t$};
-
-							\coordinate (T) at (60:\midrad);
-							\node[above right] at (T) {$\color{atomictangerine}T$};
-
-							\coordinate (X) at (120:\bigrad);
-							\node[above left] at (X) {$\color{caribbeangreen}{X}$};
-
-							\coordinate (x) at (120:\intrad);
-							\fill[caribbeangreen] (x) circle (2pt);
-
-							\draw[thick, atomictangerine, dashed] (0,0) circle (\midrad);
-							\draw[thick, caribbeangreen] (0,0) circle (\bigrad);
-						\end{tikzpicture}
-						\caption*{Condition (c)}
-					\end{figure}
-				\end{column}
-				\hfill\vrule\hfill
-				\begin{column}{0.60\textwidth}
-					\begin{figure}[H]
-						\begin{tikzpicture}
-							\def\ssmolrad{0.3}
-							\def\smolrad{0.6}
-							\def\midrad{1.1}
-							\def\intrad{1.4}
-							\def\bigrad{1.7}
-
-							\coordinate (t) at (0:\ssmolrad);
-							\fill (t) circle (2pt);
-							\node[above right=1pt] at (t) {$t$};
-
-							\coordinate (T) at (120:\intrad);
-							\node[above left] at (T) {$\color{atomictangerine}T$};
-
-							\fill(120:\midrad) circle (2pt);
-
-							\node at (60:{1.2*\bigrad}) {$\color{caribbeangreen}X$};
-							\node at (0:{1.3*\bigrad}) {$\color{caribbeangreen}\mathbf{Y}$};
-							
-							\draw[thick, atomictangerine, dashed] (0,0) circle (\intrad);
-
-							\coordinate (cE) at (0:\intrad);
-							\draw[very thick, caribbeangreen, dashdotted] (cE) circle (\intrad);
-							\draw[ultra thick, caribbeangreen] (cE) circle (\smolrad);
-						\end{tikzpicture}
-						\caption*{Condition (d)}
-					\end{figure}
-				\end{column}
-			\end{columns}
-			}
-			Finding a safe sink $t$ in $T\in\mathcal{M}_{+}$ can be done by checking each vertex if they correspond to the definition.
-		\end{frame}
-	}
 
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R$}
 
 		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
-			Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
+			Three criteria for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
 			\begin{itemize}
-				\item[1.] Stopping criteria for the main algorithm :
+				\item[1.] Stopping criterion for the main algorithm :
 				\item[2.] $s$ is a safe source in $S\subseteq{R}$, $t$ is a safe sink in $T\subseteq{R}$.
 				\item[3.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity
 			\end{itemize}
 		\end{tcolorbox}
 		
 		\begin{itemize}
-			\item Stopping criteria : ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
+			\item Stopping criterion : ${\color{caribbeangreen}\mathcal{M}_{-}} = \{V\}$ and ${\color{atomictangerine}\mathcal{M}_{+}} = \{V\}$.
 			\item ${\color{caribbeangreen}\mathcal{T}_{-}} = \{X \subseteq V - r, d^{-}(X) = k\} \cup \{V\}$
 			\item ${\color{caribbeangreen}\mathcal{M}_{-}}$ : Inclusion-wise minimal members of ${\color{caribbeangreen}\mathcal{T}_{-}}$
 			\item Finally, if $\lambda(\vec{\mathcal{H}}) \geq k$ and ${\color{caribbeangreen}\mathcal{T}_{-}} = {\color{atomictangerine}\mathcal{T}_{+}} = \{V\}$, $\vec{\mathcal{H}}$ is $(k+1)$-hyperarc-connected.
@@ -1239,9 +1095,9 @@
 	\begin{frame}{Finding \textit{admissible} $(s, t)$-hyperpaths in $R\in\mathcal{R}$}
 
 		\begin{tcolorbox}[colback=darkseagreen!5!white,colframe=darkseagreen!75!black,title=Admissible hyperpaths]
-			Three criterion for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
+			Three criteria for $P$ to be an admissible $(s, t)$-hyperpath in $R$:	
 			\begin{itemize}
-				\item[1.] \textit{Stopping criteria}-related argument.
+				\item[1.] \textit{Stopping criterion}-related argument.
 				\item[2.] $s$ is a \textbf{safe source} in $S\subseteq{R}$, $t$ is a \textbf{safe sink} in $T\subseteq{R}$.
 				\item[3.] Reorienting each hyperarc, \textbf{one by one}, does not decrease the hyperarc-connectivity{\begin{itemize}\item How to proceed ?\end{itemize}}
 			\end{itemize}
@@ -1287,9 +1143,8 @@
 			\caption*{
 				\only<1>{Let $Q^{v+}_{1}$, $Q^{v+}_{2}$ verifying the above definition.}
 				\only<2>{By definition, $Q^{v+}_{1}\not\subseteq Q^{v+}_{2}$ and $Q^{v+}_{2}\not\subseteq Q^{v+}_{1}$.}
-				\only<3>{Denote $u\in Q^{v+}_{1}\setminus Q^{v+}_{2}$, $w\in Q^{v+}_{2}\setminus Q^{v+}_{1}$.}
 				\only<4>{As $r\not\in Q^{v+}_{1}, Q^{v+}_{2}$, both are are crossing sets.}
-				\only<5>{By submodularity, if $X, Y \in {\color{atomictangerine}\mathcal{T}_{+}}$, both $X\cup{V}\in{\color{atomictangerine}\mathcal{T}_{+}}$ and $X\cap{V}\in{\color{atomictangerine}\mathcal{T}_{+}}$.}
+				\only<5>{Using Claim 1, $X\cap{V}\in{\color{atomictangerine}\mathcal{T}_{+}}$.}
 				\only<6>{$Q^{v+}_{1}\cap Q^{v+}_{2}$ is smaller (inclusion-wise) than $Q^{v+}_{1}$ and $Q^{v+}_{2}$.}
 			}
 		\end{figure}
@@ -1403,7 +1258,7 @@
 					\begin{enumerate}
 						\item Take $r$ in $V(\mathcal{H})$.
 						\item Compute sets of vertices.
-						\item Stopping Criteria
+						\item Stopping Criterion
 						\item Select a set $R$ (cf. 2.)
 						\item <alert@1> Find an admissible $(s, t)$-hyperpath in $R$ to reorient
 						\item Reorient the corresponding hyperpath.
@@ -1413,27 +1268,75 @@
 			\end{columns}	
 		}
 		\only<2->{
-			\begin{algorithm}[H]
-				\begin{algorithmic}[1]
-					\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
-					\State{Take a set $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, with $S\subseteq{R}$, then a safe source $s\in S$.}
-					\State{$Z = \{s\}$, $F = (Z, \varnothing)$, $V' = R$}
-					\While{$h = (X, v)$ exists such that $v\in V' - Z$ and $X\cap Z\not=\varnothing$}
-						\State Let $u\in X\cap{Z}$.
-						\State $Z \leftarrow Z\cup\{v\}$
-						\State $F \leftarrow F + uv$
-						\If{$Q^{v}_{+}\subsetneq V'$}
-							\State $V' \leftarrow Q^{v}_{+}$
-						\EndIf
-					\EndWhile
-					\State $T = V'$
-					\State Take a safe sink $t\in T$
-					\State $P' = F[s, t]$
-					\State $P$ is the corresponding hyperpath in $\vec{\mathcal{H}}$, obtained with $P'$.
-					\State \textbf{\textsf{Return}} $S, T, s, t, P$
-				\end{algorithmic}
-				\label{alg_1}
-			\end{algorithm}
+			\begin{itemize}[<+->]
+				\item Search $s$-out arborescence :{\begin{itemize}
+					\item $V'$ : Remaining allowed vertices to explore.
+					\item $Z$ : Already explored vertices.
+					\item $F$ : Arborescence rooted in $s$.
+				\end{itemize}}
+			\end{itemize}
+
+			\begin{figure}[H]
+				\begin{tikzpicture}
+					\def\radius{0.5}
+					\def\smol{1}
+					\def\mid{1.5}
+					\def\Radius{2.25}
+
+					\visible<5->{
+						\coordinate (O) at (0, 0);
+						\draw[thick] (O) circle (\Radius);
+						\coordinate (R) at (120:2.2);
+						\node[above left=2pt] at (R) {$R$};
+					}
+
+					\visible<6->{
+						\coordinate (s) at (210:\mid);
+						\fill[caribbeangreen] (s) circle (2pt);
+						\node[above=2pt] at (s) {$\color{caribbeangreen}s$};
+					}
+
+					\visible<7->{
+						\coordinate (v) at (210:\radius);
+						\fill (v) circle (2pt);
+						\node[below=2pt] at (v) {$v$};
+					}
+
+					\coordinate (A) at (0.5,0);
+					\visible<8->{
+						\draw[dashdotted] (A) circle (1.2);
+						\node at (0, 1.3) {$Q^{v}_{+}$};
+					}
+					
+					\visible<9->{
+						\coordinate (w) at (0.8, -0.3);
+						\fill (w) circle (2pt);
+						\node[right=2pt] at (w) {$w$};
+					}
+					\visible<10->{
+						\draw[dashdotted] (0.8, 0) circle (0.65);
+						\node at (0.6, 0.7) {$Q^{w}_{+}$};
+					}
+
+					\visible<7->{
+						\draw[thick, ->, shorten <= 3pt, shorten >= 3pt] (s) to (v);
+					}
+					\visible<9->{
+						\draw[thick, ->, shorten <= 3pt, shorten >= 3pt] (v) to (0.8, -0.3);
+					}
+
+					\visible<11->{
+						\coordinate (t) at (0.8, 0.3);
+						\fill[atomictangerine] (t) circle (2pt);
+						\draw[dashdotted] (0.8, 0) circle (0.65);
+						\node[left=2pt] at (t) {${\color{atomictangerine}t}$};
+					}
+
+					\visible<12->{
+						\draw[thick, ->, shorten <= 3pt, shorten >= 3pt] (w) to (t);
+					}
+				\end{tikzpicture}
+			\end{figure}
 		}
 	\end{frame}
 
@@ -1531,6 +1434,178 @@
 				\end{figure}
 			\end{alertblock}
 		}
+	\end{frame}
+	
+	\begin{frame}{Table of contents}
+		\tableofcontents
+	\end{frame}
+
+	\section*{Bonus}
+	\begin{frame}{Finding an admissible hyperpath $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\caption{Admissible $(s, t)$-hyperpath in $R\in\mathcal{R}\cap{\color{caribbeangreen}\mathcal{T}_{-}}$}
+				\State{Take a set $S\in{\color{caribbeangreen}\mathcal{M}_{-}}$, with $S\subseteq{R}$, then a safe source $s\in S$.}
+				\State{$Z = \{s\}$, $F = (Z, \varnothing)$, $V' = R$}
+				\While{$h = (X, v)$ exists such that $v\in V' - Z$ and $X\cap Z\not=\varnothing$}
+					\State Let $u\in X\cap{Z}$.
+					\State $Z \leftarrow Z\cup\{v\}$
+					\State $F \leftarrow F + uv$
+					\If{$Q^{v}_{+}\subsetneq V'$}
+						\State $V' \leftarrow Q^{v}_{+}$
+					\EndIf
+				\EndWhile
+				\State $T = V'$
+				\State Take a safe sink $t\in T$
+				\State $P' = F[s, t]$
+				\State $P$ is the corresponding hyperpath in $\vec{\mathcal{H}}$, obtained with $P'$.
+				\State \textbf{\textsf{Return}} $S, T, s, t, P$
+			\end{algorithmic}
+			\label{alg_1}
+		\end{algorithm}
+	\end{frame}
+
+	\begin{frame}{Safe Sources and Safe Sinks}
+		Definitions are symmetric (but proofs are not).
+		\only<1-2>{\begin{itemize}
+			\item For $S \in \mathcal{M}_{-}$, $s$ is a safe source in $S$ if :\begin{itemize}
+				\item[a]<1,2>{For every $s\in{X}\in\mathcal{T}_{+}$, we have $\color{red} S\subsetneq X$.}
+				\item[b]<2>{For every $s\in{X}\in\mathcal{D}_{+}$ such that $S\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{+}$ such that $s\not\in{Y}\subsetneq{X}$.}
+			\end{itemize}
+		\end{itemize}
+		\begin{columns}
+			\begin{column}{0.35\textwidth}
+				\only<1,2>{
+					\begin{figure}[H]
+						\begin{tikzpicture}
+							\def\smolrad{0.6}
+							\def\midrad{1.1}
+							\def\intrad{1.4}
+							\def\bigrad{1.7}
+
+							\coordinate (s) at (-60:\smolrad);
+							\fill (s) circle (2pt);
+							\node[above right=1pt] at (s) {$s$};
+
+							\coordinate (S) at (60:\midrad);
+							\node[above right] at (S) {$\color{caribbeangreen}S$};
+
+							\coordinate (X) at (120:\bigrad);
+							\node[above left] at (X) {$\color{atomictangerine}{X}$};
+
+							\coordinate (x) at (120:\intrad);
+							\fill[atomictangerine] (x) circle (2pt);
+
+							\draw[thick, caribbeangreen, dashed] (0,0) circle (\midrad);
+							\draw[ultra thick, atomictangerine] (0,0) circle (\bigrad);
+						\end{tikzpicture}
+						\caption*{Condition (a)}
+					\end{figure}
+				}
+			\end{column}
+			\hfill\vrule\hfill
+			\begin{column}{0.60\textwidth}
+				\only<2>{
+					\begin{figure}[H]
+						\begin{tikzpicture}
+							\def\ssmolrad{0.3}
+							\def\smolrad{0.6}
+							\def\midrad{1.1}
+							\def\intrad{1.4}
+							\def\bigrad{1.7}
+
+							\coordinate (s) at (0:\ssmolrad);
+							\fill (s) circle (2pt);
+							\node[above right=1pt] at (s) {$s$};
+
+							\coordinate (S) at (120:\intrad);
+							\node[above left] at (S) {$\color{caribbeangreen}S$};
+
+							\fill(120:\midrad) circle (2pt);
+
+							\node at (60:{1.2*\bigrad}) {$\color{atomictangerine}X$};
+							\node at (0:{1.3*\bigrad}) {$\color{atomictangerine}\mathbf{Y}$};
+							
+							\draw[thick, caribbeangreen, dashed] (0,0) circle (\intrad);
+
+							\coordinate (cE) at (0:\intrad);
+							\draw[very thick, atomictangerine, dashdotted] (cE) circle (\intrad);
+							\draw[ultra thick, atomictangerine] (cE) circle (\smolrad);
+						\end{tikzpicture}
+						\caption*{Condition (b)}
+					\end{figure}
+				}
+			\end{column}
+		\end{columns}
+		}
+		\only<3>{\begin{itemize}
+			\item For $T \in \mathcal{M}_{+}$, $t$ is a safe sink in $T$ if :\begin{itemize}
+				\item[c]{For every $t\in{X}\in\mathcal{T}_{-}$, we have $\color{red}T\subsetneq X$.}
+				\item[d]{For every $t\in{X}\in\mathcal{D}_{-}$ such that $T\setminus{X}\not=\varnothing$, there exists $Y\in\mathcal{T}_{-}$ such that $t\not\in{Y}\subsetneq{X}$.}
+			\end{itemize}
+		\end{itemize}
+		\begin{columns}
+			\begin{column}{0.35\textwidth}
+				\begin{figure}[H]
+					\begin{tikzpicture}
+						\def\smolrad{0.6}
+						\def\midrad{1.1}
+						\def\intrad{1.4}
+						\def\bigrad{1.7}
+
+						\coordinate (t) at (-60:\smolrad);
+						\fill (t) circle (2pt);
+						\node[above right=1pt] at (t) {$t$};
+
+						\coordinate (T) at (60:\midrad);
+						\node[above right] at (T) {$\color{atomictangerine}T$};
+
+						\coordinate (X) at (120:\bigrad);
+						\node[above left] at (X) {$\color{caribbeangreen}{X}$};
+
+						\coordinate (x) at (120:\intrad);
+						\fill[caribbeangreen] (x) circle (2pt);
+
+						\draw[thick, atomictangerine, dashed] (0,0) circle (\midrad);
+						\draw[thick, caribbeangreen] (0,0) circle (\bigrad);
+					\end{tikzpicture}
+					\caption*{Condition (c)}
+				\end{figure}
+			\end{column}
+			\hfill\vrule\hfill
+			\begin{column}{0.60\textwidth}
+				\begin{figure}[H]
+					\begin{tikzpicture}
+						\def\ssmolrad{0.3}
+						\def\smolrad{0.6}
+						\def\midrad{1.1}
+						\def\intrad{1.4}
+						\def\bigrad{1.7}
+
+						\coordinate (t) at (0:\ssmolrad);
+						\fill (t) circle (2pt);
+						\node[above right=1pt] at (t) {$t$};
+
+						\coordinate (T) at (120:\intrad);
+						\node[above left] at (T) {$\color{atomictangerine}T$};
+
+						\fill(120:\midrad) circle (2pt);
+
+						\node at (60:{1.2*\bigrad}) {$\color{caribbeangreen}X$};
+						\node at (0:{1.3*\bigrad}) {$\color{caribbeangreen}\mathbf{Y}$};
+						
+						\draw[thick, atomictangerine, dashed] (0,0) circle (\intrad);
+
+						\coordinate (cE) at (0:\intrad);
+						\draw[very thick, caribbeangreen, dashdotted] (cE) circle (\intrad);
+						\draw[ultra thick, caribbeangreen] (cE) circle (\smolrad);
+					\end{tikzpicture}
+					\caption*{Condition (d)}
+				\end{figure}
+			\end{column}
+		\end{columns}
+		}
+		Finding a safe sink $t$ in $T\in\mathcal{M}_{+}$ can be done by checking each vertex if they correspond to the definition.
 	\end{frame}
 
 \end{document}
