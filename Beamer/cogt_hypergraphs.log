@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.22)  21 NOV 2023 20:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.22)  22 NOV 2023 07:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -933,7 +933,7 @@ Package: multicol 2021/10/28 v1.9b multicolumn formatting (FMi)
 \colbreak@box=\box137
 \mc@col@check@num=\count398
 ) (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerthemeEastLansing.sty (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty) (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamercolorthemespruce.sty))
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 92.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 98.
  (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -943,24 +943,24 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ) (./cogt_hypergraphs.aux)
 \openout1 = `cogt_hypergraphs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1015,60 +1015,60 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 92.
-LaTeX Info: Redefining \ref on input line 92.
-LaTeX Info: Redefining \pageref on input line 92.
-LaTeX Info: Redefining \nameref on input line 92.
+Package hyperref Info: Link coloring OFF on input line 98.
+LaTeX Info: Redefining \ref on input line 98.
+LaTeX Info: Redefining \pageref on input line 98.
+LaTeX Info: Redefining \nameref on input line 98.
  (./cogt_hypergraphs.out) (./cogt_hypergraphs.out)
 \@outlinefile=\write5
 \openout5 = `cogt_hypergraphs.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 92.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 98.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 92.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 98.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 92.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 98.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 92.
+(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 98.
 \symnumbers=\mathgroup7
 \sympureletters=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 92.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 92.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 92.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 92.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 92.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 92.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 92.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 92.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 92.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 92.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 92.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 92.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 92.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 98.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 92.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 98.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 92.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 92.
+(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 92.
+(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 92.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 92.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 92.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 98.
  (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -1085,24 +1085,24 @@ Dictionary: translator-theorem-dictionary, Language: English
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package ragged2e Info: ABD: executing \RaggedRight on input line 92.
+Package ragged2e Info: ABD: executing \RaggedRight on input line 98.
  (/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fc-english.def
 File: fc-english.def 2016/01/12
 )
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 (./cogt_hypergraphs.nav)
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 92.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 98.
  (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <5> not available
-(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 92.
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 98.
 
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10> not available
-(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 95.
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 101.
 
 [1
 
@@ -1149,13 +1149,13 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 124.
+(Font)              <9> on input line 130.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 124.
+(Font)              <6> on input line 130.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 124.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 130.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 124.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 130.
  [3
 
 ] [4
@@ -1163,96 +1163,96 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
 ] [5
 
 ]
-Overfull \vbox (13.15836pt too high) detected at line 210
+Overfull \vbox (13.15836pt too high) detected at line 216
  []
 
 [6
 
 ]
-Overfull \vbox (13.15836pt too high) detected at line 210
+Overfull \vbox (13.15836pt too high) detected at line 216
  []
 
 [7
 
 ]
-Overfull \vbox (13.15836pt too high) detected at line 210
+Overfull \vbox (13.15836pt too high) detected at line 216
  []
 
 [8
 
 ]
-Overfull \vbox (13.15836pt too high) detected at line 210
+Overfull \vbox (13.15836pt too high) detected at line 216
  []
 
 [9
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 290.
+(Font)              <14.4> on input line 296.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 290.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 296.
 
-Overfull \vbox (27.65836pt too high) detected at line 290
+Overfull \vbox (27.65836pt too high) detected at line 296
  []
 
 [10
 
 ]
-Overfull \vbox (27.65836pt too high) detected at line 290
+Overfull \vbox (27.65836pt too high) detected at line 296
  []
 
 [11
 
 ]
-Overfull \vbox (27.65836pt too high) detected at line 290
+Overfull \vbox (27.65836pt too high) detected at line 296
  []
 
 [12
 
 ]
-Overfull \vbox (13.15836pt too high) detected at line 407
+Overfull \vbox (13.15836pt too high) detected at line 413
  []
 
 [13
 
 ]
-Overfull \vbox (13.15836pt too high) detected at line 407
+Overfull \vbox (13.15836pt too high) detected at line 413
  []
 
 [14
 
 ]
-Overfull \vbox (28.09718pt too high) detected at line 492
+Overfull \vbox (28.09718pt too high) detected at line 498
  []
 
 [15
 
 ]
-Overfull \vbox (28.09718pt too high) detected at line 492
+Overfull \vbox (28.09718pt too high) detected at line 498
  []
 
 [16
 
 ]
-Overfull \vbox (28.09718pt too high) detected at line 492
+Overfull \vbox (28.09718pt too high) detected at line 498
  []
 
 [17
 
 ]
-Overfull \vbox (28.09718pt too high) detected at line 578
+Overfull \vbox (28.09718pt too high) detected at line 584
  []
 
 [18
 
 ]
-Overfull \vbox (28.09718pt too high) detected at line 578
+Overfull \vbox (28.09718pt too high) detected at line 584
  []
 
 [19
 
 ]
-Overfull \vbox (28.09718pt too high) detected at line 578
+Overfull \vbox (28.09718pt too high) detected at line 584
  []
 
 [20
@@ -1264,7 +1264,7 @@ Overfull \vbox (28.09718pt too high) detected at line 578
 ] [23
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 730.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 736.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [24
@@ -1352,14 +1352,14 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1004.
+(hyperref)                removing `math shift' on input line 1010.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1004.
+(hyperref)                removing `math shift' on input line 1010.
 
 
-Overfull \vbox (2.04585pt too high) detected at line 1113
+Overfull \vbox (2.04585pt too high) detected at line 1119
  []
 
 [65
@@ -1382,45 +1382,45 @@ Overfull \vbox (2.04585pt too high) detected at line 1113
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 1290.
+(Font)              <12> on input line 1296.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 1290.
+(Font)              <8> on input line 1296.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1290.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1296.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1290.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1296.
 
-Overfull \vbox (0.26122pt too high) detected at line 1290
+Overfull \vbox (0.26122pt too high) detected at line 1296
  []
 
 [74
 
 ]
-Overfull \vbox (0.26122pt too high) detected at line 1290
+Overfull \vbox (0.26122pt too high) detected at line 1296
  []
 
 [75
 
 ]
-Overfull \vbox (0.26122pt too high) detected at line 1290
+Overfull \vbox (0.26122pt too high) detected at line 1296
  []
 
 [76
 
 ]
-Overfull \vbox (0.26122pt too high) detected at line 1290
+Overfull \vbox (0.26122pt too high) detected at line 1296
  []
 
 [77
 
 ]
-Overfull \vbox (0.26122pt too high) detected at line 1290
+Overfull \vbox (0.26122pt too high) detected at line 1296
  []
 
 [78
 
 ]
-Overfull \vbox (0.26122pt too high) detected at line 1290
+Overfull \vbox (0.26122pt too high) detected at line 1296
  []
 
 [79
@@ -1447,7 +1447,7 @@ Overfull \vbox (0.26122pt too high) detected at line 1290
  (./cogt_hypergraphs.vrb) [88
 
 ] (./cogt_hypergraphs.vrb)
-Overfull \vbox (0.1305pt too high) detected at line 1432
+Overfull \vbox (0.1305pt too high) detected at line 1438
  []
 
 [89
@@ -1471,7 +1471,7 @@ Overfull \vbox (0.1305pt too high) detected at line 1432
 ] [98
 
 ]
-Overfull \vbox (34.84715pt too high) detected at line 1528
+Overfull \vbox (34.84715pt too high) detected at line 1534
  []
 
 [99
@@ -1493,7 +1493,7 @@ Package rerunfilecheck Info: File `cogt_hypergraphs.out' has not changed.
 Here is how much of TeX's memory you used:
  42595 strings out of 478287
  993046 string characters out of 5849289
- 1416559 words of memory out of 5000000
+ 1416558 words of memory out of 5000000
  59752 multiletter control sequences out of 15000+600000
  564184 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
